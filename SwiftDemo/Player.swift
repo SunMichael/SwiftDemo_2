@@ -136,3 +136,36 @@ func allItemsMatch <C1: Container ,C2: Container where C1.ItemType == C2.ItemTyp
 //C1和C2是容器的两个占位类型参数 遵循Container协议，C1的itemType 遵循Equatable协议，<> 表示占位参数类型
 
 
+//  可选协议只能在含有@objc前缀的协议中生效。且@objc的协议只能被类遵循, 可选值和可选方法都会返回一个可选值 当其不可执行的时候返回nil
+@objc protocol CounterDataSource{
+    optional func incrementForCount (count :Int) ->Int
+    optional var fixedIncrement: Int {
+        get
+    }
+}
+
+@objc class counter{
+    var count = 0
+    var dataSource: CounterDataSource?
+    func increment(){
+        if let amount = dataSource?.incrementForCount!(count){
+            count += amount
+        }else if let amount = dataSource?.fixedIncrement{
+            count += amount
+        }
+        
+    }
+}
+
+class TowardsZeroSource: CounterDataSource {
+    func incrementForCount(count: Int) -> Int {
+        if count == 0 {
+            return 0
+        }else if count < 0 {
+            return 1
+        }else {
+            return -1
+        }
+    }
+}
+
