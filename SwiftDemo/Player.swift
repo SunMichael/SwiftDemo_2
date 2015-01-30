@@ -73,10 +73,29 @@ class  Player2 {
 
 
 // change there
+func swapTwoValues<T>(inout a:T , inout b:T){    //泛型函数 <T>占位类型  a，b参数类型要一致
+    let temporary = a
+    a = b
+    b = temporary
+}
 
+struct IntStack {           //将此例中的int 换成T 就是泛型版本 栈
+    var items = [Int]()
+    mutating func push(item: Int){
+        items.append(item)
+    }
+    mutating func pop() ->Int {
+        return items.removeLast()
+    }
+}
 
-
-
-
+func findStringIndex<T :Equatable>(array: [T] ,valueToFind: T) -> Int?{  //T 要遵循Equatable协议 此协议是实现了 == 和 != 比较的类型
+    for (index ,value) in enumerate(array){
+        if value == valueToFind {
+            return index
+        }
+    }
+    return nil
+}
 
 
