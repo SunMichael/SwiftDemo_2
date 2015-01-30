@@ -169,3 +169,58 @@ class TowardsZeroSource: CounterDataSource {
     }
 }
 
+
+protocol Named {
+    var name: String {
+        get
+    }
+    
+}
+protocol Aged {
+    var age: Int {
+        get
+    }
+}
+struct PersonP: Named ,Aged{
+    var name: String
+    var age: Int
+}
+func wishHappyBirthday(celebrator: protocol <Named ,Aged>){    //参数是一个 遵循named 和aged 约束的类型
+    println("Happy birthday\(celebrator.name)")
+}
+
+
+// 权限设置  public 默认 private
+
+public class SomePublicClass {
+    public var somePubicProperty = 0
+    var someInternalProperty = 0
+    private func somePrivateMethod(){
+        
+    }
+}
+
+class SomeInternalClass {
+    var someInternalProperty = 0
+    private func somePrivateMethod(){
+        
+    }
+}
+private class SomePrivateClass{
+    var somePrivateProperty = 0
+    func somePrivateMethod(){
+        
+    }
+}
+
+struct TrackedString {
+    private(set) var numberOfEdits = 0      // private(set)声明只能在定义该结构体的源文件中赋值
+    var value: String = "" {
+        didSet {
+            numberOfEdits++
+        }
+    }
+}
+
+
+

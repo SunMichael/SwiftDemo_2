@@ -135,6 +135,18 @@ class ViewController: UIViewController {
         
         
         self.testForXunHuan()
+        
+        let birthdayPerson = PersonP(name: "jack",age: 21)
+        wishHappyBirthday(birthdayPerson)
+        
+        let someObj = SomeInternalClass()
+        someObj.someInternalProperty = 1
+        
+        var stringToEdit = TrackedString()
+        stringToEdit.value = "this is first"
+        stringToEdit.value += "this is second"
+        println("stringEditsNumber = \(stringToEdit.numberOfEdits)")
+        
     }
     
     func functionForView(str :NSString ,aNum: Int) ->NSString{
@@ -419,6 +431,8 @@ class ViewController: UIViewController {
         var data = [String]()
         
     }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
