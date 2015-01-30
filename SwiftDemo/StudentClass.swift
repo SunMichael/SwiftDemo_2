@@ -101,7 +101,9 @@ struct Checkboard {
 }
 
 
-
+enum ExampleEnum: Int{          //A = 0, B = 1 ,D = 6
+    case A , B, C = 5, D
+}
 
 
 

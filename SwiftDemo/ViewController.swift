@@ -20,6 +20,12 @@ class ViewController: UIViewController {
         
         let aNum = 10         //*** 常量只能被赋值一次
         var varOne: Int?        //加上？ varOne可以为nil
+        var varTwo: Optional<Int>
+        
+        // 数组的声明 2种等价
+        let someArray: [String] = ["AA" ,"NN"]
+        let someArray2: Array<String> = ["MM" ,"UU"]
+        
         
         aStudent = Student()
         aStudent.age = 15           //**** 等号2边都要空格
@@ -402,6 +408,14 @@ class ViewController: UIViewController {
                 p.y = newValue.y
             }
             */
+            /*        属性监视器
+            willSet (newPoint){
+                
+            }
+            didSet (newPoint){
+                
+            }
+           */
         }
     }
     
