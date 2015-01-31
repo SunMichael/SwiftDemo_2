@@ -12,3 +12,11 @@ N1: 以self修饰的枚举或结构体方法必须以mutating关键字作为函�
 N2: 有两种方法来创建已声明的类的实例：
 调用类的一个构造器，参见构造器(initializers)。
 如果没有声明构造器，而且类的所有属性都被赋予了初始值，调用类的默认构造器，参见默认构造器(default initializers).
+
+
+N3: is模式和as模式。这两种模式均只出现在switch语句中的case标签中。is模式和as模式有以下形式：
+is type
+pattern as type
+
+is模式 → is 类型
+as模式 → 模式 as 类型

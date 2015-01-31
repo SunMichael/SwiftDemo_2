@@ -36,12 +36,12 @@ class ViewController: UIViewController {
         food = Food(name:"Apple")
         
         var quantityFood = RecipeIngredient(name: "Orange",quantity: 1)
-//        quantityFood.name 
+        //        quantityFood.name
         
         print(aStudent)          //print 和 println的区别是 后者会换行
         
         var counter = Counter()
-//        counter.incrementBy(5, numberOfTimes: 3)    //这里swift只是把第一个参数当成incrementBy的局部名称，numberOfTime是局部名称 也是外部名称
+        //        counter.incrementBy(5, numberOfTimes: 3)    //这里swift只是把第一个参数当成incrementBy的局部名称，numberOfTime是局部名称 也是外部名称
         counter.incrementBy(amount: 5, numberOfTimes: 3)  //这个是加了#后 变成外部名称
         
         
@@ -271,7 +271,14 @@ class ViewController: UIViewController {
             var value = s > 2
             return value
         })
-        //pre闭包名？ （参数:类型）-> 返回值 in 执行方法 return 值
+        
+        
+        //pre闭包名？ （参数:类型）-> 返回值 in 执行方法
+        /*        闭包表达式语法
+        { (parameters) -> returnType in
+             statements
+        }
+        */
         
         
         // 对应闭包的三种简写
@@ -391,7 +398,7 @@ class ViewController: UIViewController {
         var y = 0.0
     }
     struct CPoint {
-    
+        
         var p = Point()
         var XPoint :Point {    //声明属性的 get set方法  计算属性
             get{
@@ -400,27 +407,27 @@ class ViewController: UIViewController {
             set(newPoint){        //这个是怎么判断newpoint是Point的呢 ？？？难道是XPoint:Point
                 p.x = newPoint.x
                 p.y = newPoint.y
-
+                
             }
             /*     setter 的简写  newValue参数名
             set {
-                p.x = newValue.x
-                p.y = newValue.y
+            p.x = newValue.x
+            p.y = newValue.y
             }
             */
             /*        属性监视器
             willSet (newPoint){
-                
+            
             }
             didSet (newPoint){
-                
+            
             }
-           */
+            */
         }
     }
     
     struct Cuboid {    //只有get 没有set的计算属性就是只读属性
-    
+        
         var width = 0.0 , height = 0.0 ,depth = 0.0
         var volume :Double {
             get {

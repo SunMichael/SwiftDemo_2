@@ -223,4 +223,14 @@ struct TrackedString {
 }
 
 
+func addTwoNumbers(a: Int)(b: Int) ->Int{      //柯里化函数   一个函数传入一个Int然后输出作为另一个函数的输入，然后又返回一个Int
+    return a + b
+}
+
+func addTwoNumbers2(a: Int) ->(Int -> Int){
+    func addTheSecondNumber(b: Int) ->Int{
+        return a + b
+    }
+    return addTheSecondNumber
+}
 

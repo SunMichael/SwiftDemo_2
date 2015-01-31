@@ -106,7 +106,22 @@ enum ExampleEnum: Int{          //A = 0, B = 1 ,D = 6
 }
 
 
-
+extension Double {
+    var km: Double {              //只读计算属性
+        return self * 1_000.0
+    }
+    var m: Double{
+        return self
+    }
+    var cm: Double {
+        return self / 100.0
+    }
+    var mm: Double {
+        get{
+            return self / 1_000.0
+        }
+    }
+}
 
 
 
