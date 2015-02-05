@@ -10,14 +10,14 @@
 	<string>SwiftDemo</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>E1DB091A5A69F9F1C829653649658441C116B652</key>
+		<key>E8B41EDD1970D68E87502CE0C15DB8B543659CDF</key>
 		<string>https://github.com/SunMicheal/SwiftDemo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>SwiftDemo.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>E1DB091A5A69F9F1C829653649658441C116B652</key>
+		<key>E8B41EDD1970D68E87502CE0C15DB8B543659CDF</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>E1DB091A5A69F9F1C829653649658441C116B652</string>
+	<string>E8B41EDD1970D68E87502CE0C15DB8B543659CDF</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>E1DB091A5A69F9F1C829653649658441C116B652</string>
+			<string>E8B41EDD1970D68E87502CE0C15DB8B543659CDF</string>
 			<key>IDESourceControlWCCName</key>
 			<string>SwiftDemo</string>
 		</dict>

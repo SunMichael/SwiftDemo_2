@@ -72,7 +72,7 @@ class  Player2 {
 }
 
 
-// change there
+// change there         inout 指写入读出参数  本身值能在函数使用中被改变
 func swapTwoValues<T>(inout a:T , inout b:T){    //泛型函数 <T>占位类型  a，b参数类型要一致
     let temporary = a
     a = b
@@ -233,4 +233,86 @@ func addTwoNumbers2(a: Int) ->(Int -> Int){
     }
     return addTheSecondNumber
 }
+
+//MARK: Attention 初始化顺序，子类必须先初始化成员变量再调用父类的初始化方法
+class Cat {
+    var name: String
+    init(){
+        name = "cat"
+    }
+}
+class Tiger: Cat {
+    let power: Int
+    override init() {
+        power = 10
+        super.init()           //下面2步都可以省略，swift会隐式调用super.init
+        name = "tiger"
+    }
+}
+//MARK: 协议
+protocol MyProtocol {          // 在enum和struct中还是使用static  class中使用class
+    class func foo() ->String
+}
+struct MyStruct: MyProtocol {
+    static func foo() -> String {
+        return "MyStruct"
+    }
+}
+enum MyEnum: MyProtocol{
+    static func foo() -> String {
+        return "MyEnum"
+    }
+}
+class MyClass: MyProtocol {
+    class func foo() -> String {
+        return "MyClass"
+    }
+}
+
+func fib(n: Int) -> Int{
+    if n <= 1{
+        return 1
+    }else{
+        return fib(n-1) + fib(n-2)
+    }
+}
+/*
+extension NSURL: StringLiteralConvertible {
+    public class func convertFromStringLiteral(value: String) ->self {
+        if let url = self(string: value){
+            return url
+        }
+        fatalError("Bad URL")
+    }
+    public class func convertFromExtendedGraphemeClusterLiteral(value: String) ->self{
+        return self(string: value)
+    }
+}
+*/
+/*
+extension Array {
+    subscript(input: [Int]) ->Slice<T>{
+        get{
+            var result = Slice<T>()
+            for i in input{
+                assert(i < self.count, result.append(self[i]))
+            }
+            return result
+        }
+    }
+}
+*/
+@objc(MyNewClass)
+class  MyNewClass {
+    func method(number: Int) ->Int{
+        return number + 1
+    }
+}
+
+
+
+
+
+
+
 

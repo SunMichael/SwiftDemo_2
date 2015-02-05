@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3950A0431A76483400031A11 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3950A0421A76483400031A11 /* Player.swift */; };
+		396755F51A8309DE004612C1 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396755F41A8309DE004612C1 /* Container.swift */; };
+		396755FB1A834213004612C1 /* CoderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 396755FA1A834213004612C1 /* CoderModel.m */; };
+		396755FD1A834319004612C1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 396755FC1A834319004612C1 /* Foundation.framework */; };
 		396F20DA1A709F9600A6A540 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396F20D91A709F9600A6A540 /* AppDelegate.swift */; };
 		396F20DC1A709F9600A6A540 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396F20DB1A709F9600A6A540 /* ViewController.swift */; };
 		396F20DF1A709F9600A6A540 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 396F20DD1A709F9600A6A540 /* Main.storyboard */; };
@@ -15,6 +18,8 @@
 		396F20E41A709F9600A6A540 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 396F20E21A709F9600A6A540 /* LaunchScreen.xib */; };
 		396F20F01A709F9600A6A540 /* SwiftDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396F20EF1A709F9600A6A540 /* SwiftDemoTests.swift */; };
 		396F20FA1A709FC700A6A540 /* StudentClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396F20F91A709FC700A6A540 /* StudentClass.swift */; };
+		39A28C9E1A7B7338003607B9 /* NoteFile in Resources */ = {isa = PBXBuildFile; fileRef = 39A28C9D1A7B7338003607B9 /* NoteFile */; };
+		39B683A91A806E2000CC330B /* BlockFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B683A81A806E2000CC330B /* BlockFile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +34,11 @@
 
 /* Begin PBXFileReference section */
 		3950A0421A76483400031A11 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		396755F41A8309DE004612C1 /* Container.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
+		396755F81A834212004612C1 /* SwiftDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftDemo-Bridging-Header.h"; sourceTree = "<group>"; };
+		396755F91A834213004612C1 /* CoderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoderModel.h; sourceTree = "<group>"; };
+		396755FA1A834213004612C1 /* CoderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoderModel.m; sourceTree = "<group>"; };
+		396755FC1A834319004612C1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		396F20D41A709F9600A6A540 /* SwiftDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		396F20D81A709F9600A6A540 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		396F20D91A709F9600A6A540 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +50,8 @@
 		396F20EE1A709F9600A6A540 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		396F20EF1A709F9600A6A540 /* SwiftDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDemoTests.swift; sourceTree = "<group>"; };
 		396F20F91A709FC700A6A540 /* StudentClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentClass.swift; sourceTree = "<group>"; };
+		39A28C9D1A7B7338003607B9 /* NoteFile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NoteFile; sourceTree = "<group>"; };
+		39B683A81A806E2000CC330B /* BlockFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockFile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				396755FD1A834319004612C1 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +76,7 @@
 		396F20CB1A709F9600A6A540 = {
 			isa = PBXGroup;
 			children = (
+				396755FC1A834319004612C1 /* Foundation.framework */,
 				396F20D61A709F9600A6A540 /* SwiftDemo */,
 				396F20EC1A709F9600A6A540 /* SwiftDemoTests */,
 				396F20D51A709F9600A6A540 /* Products */,
@@ -85,10 +99,16 @@
 				396F20DB1A709F9600A6A540 /* ViewController.swift */,
 				396F20F91A709FC700A6A540 /* StudentClass.swift */,
 				3950A0421A76483400031A11 /* Player.swift */,
+				39B683A81A806E2000CC330B /* BlockFile.swift */,
+				396755F41A8309DE004612C1 /* Container.swift */,
+				396755F91A834213004612C1 /* CoderModel.h */,
+				396755FA1A834213004612C1 /* CoderModel.m */,
 				396F20DD1A709F9600A6A540 /* Main.storyboard */,
+				39A28C9D1A7B7338003607B9 /* NoteFile */,
 				396F20E01A709F9600A6A540 /* Images.xcassets */,
 				396F20E21A709F9600A6A540 /* LaunchScreen.xib */,
 				396F20D71A709F9600A6A540 /* Supporting Files */,
+				396755F81A834212004612C1 /* SwiftDemo-Bridging-Header.h */,
 			);
 			path = SwiftDemo;
 			sourceTree = "<group>";
@@ -200,6 +220,7 @@
 			files = (
 				396F20DF1A709F9600A6A540 /* Main.storyboard in Resources */,
 				396F20E41A709F9600A6A540 /* LaunchScreen.xib in Resources */,
+				39A28C9E1A7B7338003607B9 /* NoteFile in Resources */,
 				396F20E11A709F9600A6A540 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -219,9 +240,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3950A0431A76483400031A11 /* Player.swift in Sources */,
+				396755F51A8309DE004612C1 /* Container.swift in Sources */,
 				396F20DC1A709F9600A6A540 /* ViewController.swift in Sources */,
 				396F20DA1A709F9600A6A540 /* AppDelegate.swift in Sources */,
 				396F20FA1A709FC700A6A540 /* StudentClass.swift in Sources */,
+				396755FB1A834213004612C1 /* CoderModel.m in Sources */,
+				39B683A91A806E2000CC330B /* BlockFile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,9 +368,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SwiftDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-D FREE_VERSION";
 				PRODUCT_NAME = SwiftDemo;
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftDemo/SwiftDemo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -354,9 +382,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = SwiftDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-D FREE_VERSION";
 				PRODUCT_NAME = SwiftDemo;
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftDemo/SwiftDemo-Bridging-Header.h";
 			};
 			name = Release;
 		};

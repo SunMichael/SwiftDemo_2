@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class ViewController: UIViewController {
     
     var aStudent :Student!   //声明其他类的变量 不用像oc那样引入h文件 直接写？
@@ -152,6 +151,13 @@ class ViewController: UIViewController {
         stringToEdit.value = "this is first"
         stringToEdit.value += "this is second"
         println("stringEditsNumber = \(stringToEdit.numberOfEdits)")
+        
+        
+        
+//        CoderModel *coder = [CoderModel new] ;
+       var coder = CoderModel(coderModelWithName: "Sun", andAge: 23)
+       println("Coder == \(coder.name ),\(coder.age)")
+        
         
     }
     
@@ -453,6 +459,43 @@ class ViewController: UIViewController {
         
     }
     
+    func testFunction(){
+        var nums = [1,9,2,8]
+        func testF(num1: Int ,num2: Int) ->Bool{
+            return num1 > num2
+        }
+        sort(&nums, testF)
+        println(nums)
+        
+        sort(&nums, { (num1: Int, num2: Int) -> Bool in
+            return num1 > num2
+        })
+        println(nums)
+        
+        sort(&nums, { (num1, num2) -> Bool in
+            return num1 > num2
+        })
+        
+        sort(&nums, {$0 > $1})
+        
+        
+        let f1 = MyNewClass.method
+        // class func method 的版本
+//        let f2: (Int ->Int) = MyNewClass.method
+        let f3: MyNewClass ->Int ->Int = MyNewClass.method
+        // func method 的柯里化版本
+        
+        // 获取随机数时要注意 arc4random产生的是uint32数字 在32位CPU环境中有一半机会转换时越界（uint 是有正负符号），使用以下方式
+        let diceFaceCount: UInt32 = 6
+        let randomRoll = Int(arc4random_uniform(diceFaceCount)) + 1     //产生一个0-5的随机数
+        println(randomRoll)
+        
+    }
+    
+    func randomInRange(range :Range<Int>) ->Int{         //创建一个范围随机数
+        let count = UInt32(range.endIndex - range.startIndex)
+        return Int(arc4random_uniform(count)) + range.startIndex
+    }
     
     
     override func didReceiveMemoryWarning() {

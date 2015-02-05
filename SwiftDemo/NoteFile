@@ -20,3 +20,102 @@ pattern as type
 
 is模式 → is 类型
 as模式 → 模式 as 类型
+
+
+N4: 如果我们要使用 Objective-C 的代码或者特性来调用纯 Swift 的类型时候,我们会因为找不到所需要的这些运行时信息,而导致失败。解决起来也 很简单,在 Swift 类型文件中,我们可以将需要暴露给 Objective-C 使用的任何地方 (包 括类,属性和方法等) 的声明前面加上 @objc 修饰符
+
+N5: 值类型(Value Types)：每个实例都保留了一分独有的数据拷贝，一般以结构体 （struct）、枚举（enum） 或者元组（tuple）的形式出现。
+引用类型(Reference Type)：每个实例共享同一份数据来源，一般以类（class）的形式出现。
+
+
+N6: Swift 里可以将方法进行柯里化 (Currying),也就是把接受多个参数的方法变换成接受 第一个参数的方法,并且返回接受余下的参数并且返回结果的新方法.
+
+func addTwoNumbers(a: Int)(num: Int) -> Int {
+return a + num
+}
+
+//然后通过只传入第一个括号内的参数进行调用,这样将返回另一个方法:
+let addToFour = addTwoNumbers(4) // addToFour 是一个 Int
+-> Int
+
+let result = addToFour(num: 6) // result = 10
+
+
+N7: 与 Objective-C 不同,Swift 的初始化方法需要保证类型的所有属性都被初始化
+
+
+N8: let参数可以在init初始化方法中赋值
+
+N9:
+protocol A {
+func bar() -> Int
+}
+protocol B {
+func bar() -> String
+}
+
+class Class: A, B {
+func bar() -> Int {
+return 1
+}
+
+func bar() -> String {
+return "Hi"
+}
+}
+这样一来两个协议的方法名一样时,对于 bar(),只要在调用前进行类型转换就可以了:
+
+let instance = Class()
+let num = (instance as A).bar()// 1
+let str = (instance as B).bar()// "Hi"
+
+N10: 在 Swift 中 class,struct 和 enum 都是可以实现 protocol 的。那么如果我们想在 protocol 里定义一个类型域上的方法或者计算属性的话,应该 用哪个关键字呢?答案是使用 class 进行定义,但是在实现时还是按照上面的规则:在 class 里使用 class 关键字,而在 struct 或 enum 中仍然使用 static – 虽然在 protocol 中定义时使用的是 class
+
+N11: 在 Swift 类型文件中,我们可以将需要暴露给 Objective-C 使用的任何地方 (包 括类,属性和方法等) 的声明前面加上 @objc 修饰符。注意这个步骤只需要对那些不是 继承自 NSObject 的类型进行,如果你用 Swift 写的 class 是继承自 NSObject 的话,Swift会默认自动为所有的非 private 的类和成员加上 @objc。这就是说,对一个 NSObject 的 子类,你只需要导入相应的头文件就可以在 Objective-C 里使用这个类了。
+
+
+N12: 另一种策略是使用类型嵌套的方法来指定访问的范围。常见做法是将名字重复的类型定义到不同的 struct 中，以此避免冲突。这样在不使用多个 module 的情况下也能取得隔离同样名字的类型的效果：
+
+struct MyClassContainer1 {
+class MyClass {
+class func hello() {
+println("hello from MyClassContainer1")
+}
+}
+}
+
+struct MyClassContainer2 {
+class MyClass {
+class func hello() {
+println("hello from MyClassContainer2")
+}
+}
+}
+使用时：
+
+MyClassContainer1.MyClass.hello()
+MyClassContainer2.MyClass.hello()
+
+
+
+N13: typealias 是用来为已经存在的类型重新定义名字的，通过命名，可以使代码变得更加清晰。
+
+N14: arm 和 arm64 两项分别对应 32 位 CPU 和 64 位 CPU 的真机情况，而对于模拟器，相应地 32 位设备的模拟器和 64 位设备的模拟器所对应的分别是 i386 和 x86_64
+
+N15: Swift 提供了使用下划线 _ 来作为参数的外部标签，来使调用时不再需要加上参数名字。
+
+
+
+N16: 在某个类的子类中，初始化方法里语句的顺序并不是随意的，我们需要保证在当前子类实例的成员初始化完成后才能调用父类的初始化方法
+
+N17: Swift 中 let 声明的值是不变量，无法被写入赋值，这对于构建线程安全的 API 十分有用。而因为 Swift 的 init 只可能被调用一次，因此在 init 中我们可以为不变量进行赋值，而不会引起任何线程安全的问题
+
+
+N18: convenience 的初始化方法是不能被子类重写或者是从子类中以 super 的方式被调用的。
+
+N19: 在非 class 的类型上下文中，我们统一使用 static 来描述类型作用域。这包括在 enum 和 struct 中表述类型方法和类型属性时。在这两个值类型中，我们可以在类型范围内声明并使用存储属性，计算属性和方法。
+
+N20: class 关键字相比起来就明白许多，是专门用在 class 类型的上下文中的，可以用来修饰类方法以及类的计算属性。要特别注意 class 中现在是不能出现存储属性的
+
+N21: 在 class 里使用 class 关键字，而在 struct 或 enum 中仍然使用 static -- 虽然在 protocol 中定义时使用的是 class
+

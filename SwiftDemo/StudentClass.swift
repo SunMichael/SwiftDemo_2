@@ -33,7 +33,7 @@ public func StudentFuncOne(stringName: NSString) ->NSString{
 
 class Counter  {
     var count = 0
-    var  shareCounter = Counter()
+//    var  shareCounter = Counter()
     func increment() {
         count++
     }
