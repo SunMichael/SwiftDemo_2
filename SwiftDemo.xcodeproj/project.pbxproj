@@ -10,7 +10,7 @@
 		3950A0431A76483400031A11 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3950A0421A76483400031A11 /* Player.swift */; };
 		396755F51A8309DE004612C1 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396755F41A8309DE004612C1 /* Container.swift */; };
 		396755FB1A834213004612C1 /* CoderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 396755FA1A834213004612C1 /* CoderModel.m */; };
-		396755FD1A834319004612C1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 396755FC1A834319004612C1 /* Foundation.framework */; };
+		396755FD1A834319004612C1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 396755FC1A834319004612C1 /* Foundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		396F20DA1A709F9600A6A540 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396F20D91A709F9600A6A540 /* AppDelegate.swift */; };
 		396F20DC1A709F9600A6A540 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396F20DB1A709F9600A6A540 /* ViewController.swift */; };
 		396F20DF1A709F9600A6A540 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 396F20DD1A709F9600A6A540 /* Main.storyboard */; };
@@ -33,9 +33,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		392BB39D1A845020000F5101 /* SwiftDemo-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SwiftDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		3950A0421A76483400031A11 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		396755F41A8309DE004612C1 /* Container.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
-		396755F81A834212004612C1 /* SwiftDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		396755F91A834213004612C1 /* CoderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoderModel.h; sourceTree = "<group>"; };
 		396755FA1A834213004612C1 /* CoderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoderModel.m; sourceTree = "<group>"; };
 		396755FC1A834319004612C1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -108,7 +108,6 @@
 				396F20E01A709F9600A6A540 /* Images.xcassets */,
 				396F20E21A709F9600A6A540 /* LaunchScreen.xib */,
 				396F20D71A709F9600A6A540 /* Supporting Files */,
-				396755F81A834212004612C1 /* SwiftDemo-Bridging-Header.h */,
 			);
 			path = SwiftDemo;
 			sourceTree = "<group>";
@@ -117,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				396F20D81A709F9600A6A540 /* Info.plist */,
+				392BB39D1A845020000F5101 /* SwiftDemo-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -306,6 +306,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEFINES_MODULE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -324,6 +325,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_MODULE_NAME = SwiftDemo;
+				PRODUCT_NAME = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -348,6 +351,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				DEFINES_MODULE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -359,6 +363,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_MODULE_NAME = SwiftDemo;
+				PRODUCT_NAME = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -369,6 +375,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = NO;
 				INFOPLIST_FILE = SwiftDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-D FREE_VERSION";
@@ -383,6 +390,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = NO;
 				INFOPLIST_FILE = SwiftDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-D FREE_VERSION";

@@ -302,7 +302,7 @@ extension Array {
     }
 }
 */
-@objc(MyNewClass)
+@objc(MyNewClass)       //加objc(CLASSNAME) 由于类名是提供给oc使用所以一定是英文
 class  MyNewClass {
     func method(number: Int) ->Int{
         return number + 1

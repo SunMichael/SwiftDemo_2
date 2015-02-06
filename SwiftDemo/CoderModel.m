@@ -7,6 +7,12 @@
 //
 
 #import "CoderModel.h"
+#import "SwiftDemo-swift.h"     //swift头文件注意 在objc头文件中可能会循环引用  最好放在.m文件中
+@interface CoderModel()
+
+@property (nonatomic ,strong) MyNewClass *swiftObj ;
+
+@end
 
 @implementation CoderModel
 

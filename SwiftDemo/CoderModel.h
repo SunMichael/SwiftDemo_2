@@ -7,13 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SwiftDemo-swift.h"      //在oc中使用swift 需要写PRODUCT NAME -swift.h ，在swift中使用oc 需要在生产的bridging-Header中写 #import "XXX.h"
+
+
+//在oc中使用swift 需要写PRODUCT NAME -swift.h ，在swift中使用oc 需要在生产的bridging-Header中写
+
+
+
 @interface CoderModel : NSObject
 
 @property (nonatomic ,strong) NSString* name;
 @property (nonatomic ,assign) int age ;
 
-@property (nonatomic ,strong) MyNewClass *swiftObj;
+//@property (nonatomic ,strong) MyNewClass *swiftObj;
 
 -(id)initCoderModelWithName:(NSString *)name andAge:(int)age;
 
