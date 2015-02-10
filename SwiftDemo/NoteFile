@@ -119,3 +119,8 @@ N20: class 关键字相比起来就明白许多，是专门用在 class 类型�
 
 N21: 在 class 里使用 class 关键字，而在 struct 或 enum 中仍然使用 static -- 虽然在 protocol 中定义时使用的是 class
 
+
+N22: 以self修饰的枚举或结构体方法必须以mutating关键字作为函数声明头。
+
+N23: ? 放在某个 optional 的 protocol 方法的括号前面，以表示询问是否可以对该方法调用
+

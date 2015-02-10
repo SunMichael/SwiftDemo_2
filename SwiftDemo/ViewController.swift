@@ -158,7 +158,12 @@ class ViewController: UIViewController {
        var coder = CoderModel(coderModelWithName: "Sun", andAge: 23)
        println("Coder == \(coder.name ),\(coder.age)")
         
-        
+        let fun1:(Int ,String) ->String = {(num: Int ,str:String) ->String in
+            return String(num) + str
+        }
+        fun1(222,"KKKK")
+        someTrailingBlick("Trailing Block", fun1)
+        someTrailingBlick2("Trailing Block2", fun1)
     }
     
     func functionForView(str :NSString ,aNum: Int) ->NSString{
@@ -490,11 +495,43 @@ class ViewController: UIViewController {
         let randomRoll = Int(arc4random_uniform(diceFaceCount)) + 1     //产生一个0-5的随机数
         println(randomRoll)
         
+        self.somenFunctionThatTakesAClosure { () -> () in
+            
+        }
+        //不适用trailing闭包进行函数调用
+        somenFunctionThatTakesAClosure(){
+            //闭包主体
+        }
+        //使用trailing闭包进行函数调用
+        somenFunctionThatTakesAClosure({
+            //闭包主体
+        })
+        
+    
     }
     
     func randomInRange(range :Range<Int>) ->Int{         //创建一个范围随机数
         let count = UInt32(range.endIndex - range.startIndex)
         return Int(arc4random_uniform(count)) + range.startIndex
+    }
+    
+    
+    //MARK: 尾行闭包是在函数扩号之外的闭包表达式，支持作为最后一个参数调用
+    func somenFunctionThatTakesAClosure(closure:() ->()){
+        //函数体部分
+        println(" This is a trailing ")
+        
+    }
+    
+    func someTrailingBlick(str: String ,closure:(num22: Int,str2: String) ->String){   //第二个是函数参数，不能当变量使用
+        var string = closure(num22: 111,str2: "TTTT")
+
+        println("trailing str =\(str) closure =\(string)")
+
+    }
+    
+    func someTrailingBlick2(str: String,(Int ,String) ->String){
+        println("trailing str2 =\(str) ")
     }
     
     

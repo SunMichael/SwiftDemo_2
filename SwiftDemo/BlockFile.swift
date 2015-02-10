@@ -81,9 +81,9 @@ func distanceBetweenPoint(fromLocation: Location ,toLocation:Location) ->Distanc
 
 func someButtonPressed(sender: AnyObject!){
     #if FREE_VERSION
-    let width = BOUND.size.width
-    #else
-   
+        let width = BOUND.size.width
+        #else
+        
     #endif
 }
 
@@ -94,7 +94,7 @@ func mySum(input: Int...) ->Int{
 }
 
 extension NSString {      //swift中nsstring 可变的不同类型参数的声明
-//    convenience init(format: NSString , _ args: CVarArgType...)
+    //    convenience init(format: NSString , _ args: CVarArgType...)
 }
 
 
@@ -184,4 +184,25 @@ class TestClass: TestProtocol {
     class func foo() -> String {
         return "foo"
     }
+    
+}
+
+//MARK: 闭包捕获上下文, 函数和闭包都是引用类型
+func makeIncrementor(forIncrement amount: Int) -> () ->Int {
+    var runningTotal = 0
+    func incrementor() -> Int{
+        runningTotal += amount
+        return runningTotal
+    }
+    return incrementor
+}
+func testForLastFunc(){
+    
+    let incrementByTen = makeIncrementor(forIncrement: 10)
+    //此时的 incrementByTen是个无参数函数, 该函数指向每次调用都会加10的函数
+    var valueNum = incrementByTen()
+    //返回值是 10
+    incrementByTen()
+    //返回值是 20
+    
 }
