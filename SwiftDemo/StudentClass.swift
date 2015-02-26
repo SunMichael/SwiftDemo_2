@@ -73,11 +73,32 @@ class RecipeIngredient: Food {
 }
 
 
-
+//MARK: 闭包的定义
 class SomeClass {
     let someProperty: String = {        //使用闭包设置默认值 注意闭包结尾的大括号后面接了一对空的小括号。这是用来告诉 Swift 需要立刻执行此闭包。如果你忽略了这对括号，相当于是将闭包本身作为值赋值给了属性，而不是将闭包的返回值赋值给属性。
         return "AAAA"
     }()
+    
+    
+    var str:String {
+        return "JobDeer"
+    }
+    
+    var string:String {
+        get{
+            return "Seven"
+        }
+        set{
+            println("set ok")
+        }
+    }
+    
+    // 可以在闭包中定义参数，返回值，闭包后括号执行 ，并在括号内传值
+    var string2 = {
+        (arg1:String ,arg2:String) ->String in
+        return arg1 + arg2
+    }("Job","Deer")
+    
 }
 
 

@@ -206,3 +206,26 @@ func testForLastFunc(){
     //返回值是 20
     
 }
+
+
+func calculate(opr: String) -> (Int ,Int) ->Int{
+    var reslut: (Int ,Int) ->Int
+    switch (opr) {
+    case "+" :
+        reslut = {a,b in
+            return a + b
+        }
+    default :
+        reslut = {a ,b in
+            return a - b
+        }
+    }
+    return reslut
+}
+
+//MARK: 使用闭包返回值
+let c1: Int = {(a:Int ,b:Int) -> Int in
+    return a + b
+}(5,5)
+
+
