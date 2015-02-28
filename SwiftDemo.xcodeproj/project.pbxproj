@@ -20,6 +20,7 @@
 		396F20FA1A709FC700A6A540 /* StudentClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396F20F91A709FC700A6A540 /* StudentClass.swift */; };
 		39A28C9E1A7B7338003607B9 /* NoteFile in Resources */ = {isa = PBXBuildFile; fileRef = 39A28C9D1A7B7338003607B9 /* NoteFile */; };
 		39B683A91A806E2000CC330B /* BlockFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B683A81A806E2000CC330B /* BlockFile.swift */; };
+		39C737CD1AA1BA280013D5B8 /* SecViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C737CC1AA1BA280013D5B8 /* SecViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		396F20F91A709FC700A6A540 /* StudentClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentClass.swift; sourceTree = "<group>"; };
 		39A28C9D1A7B7338003607B9 /* NoteFile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NoteFile; sourceTree = "<group>"; };
 		39B683A81A806E2000CC330B /* BlockFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockFile.swift; sourceTree = "<group>"; };
+		39C737CC1AA1BA280013D5B8 /* SecViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 			children = (
 				396F20D91A709F9600A6A540 /* AppDelegate.swift */,
 				396F20DB1A709F9600A6A540 /* ViewController.swift */,
+				39C737CC1AA1BA280013D5B8 /* SecViewController.swift */,
 				396F20F91A709FC700A6A540 /* StudentClass.swift */,
 				3950A0421A76483400031A11 /* Player.swift */,
 				39B683A81A806E2000CC330B /* BlockFile.swift */,
@@ -243,6 +246,7 @@
 				396755F51A8309DE004612C1 /* Container.swift in Sources */,
 				396F20DC1A709F9600A6A540 /* ViewController.swift in Sources */,
 				396F20DA1A709F9600A6A540 /* AppDelegate.swift in Sources */,
+				39C737CD1AA1BA280013D5B8 /* SecViewController.swift in Sources */,
 				396F20FA1A709FC700A6A540 /* StudentClass.swift in Sources */,
 				396755FB1A834213004612C1 /* CoderModel.m in Sources */,
 				39B683A91A806E2000CC330B /* BlockFile.swift in Sources */,

@@ -14,8 +14,55 @@ class ViewController: UIViewController {
     
     let sNum:Int!     // Int8 ,Int32, Int 数据类型   Int默认根据编译器—> Int32 或者 Int64
     
+    var label: UILabel!
+    func changeLabelText(sender :NSNotification) {
+        println("get notification ---\(sender)")
+        label.text = "Make Change"
+    }
+    
+    func showSomeUI() {
+        
+        NSNotificationCenter .defaultCenter() .addObserver(self, selector: "changeLabelText:", name: "Change", object: nil)
+        
+        var button: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton       //枚举值和 结构体数据 的调用用点？
+        button.frame = CGRectMake(100, 40, 100, 100)
+        button.setImage(UIImage(named: "icon"), forState: UIControlState.Normal)
+        button.addTarget(self, action: "btnOnTouched:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.view .addSubview(button)
+        
+        
+        label = UILabel(frame: CGRectMake(100, 180, 200, 30))
+        label.text = "This is a label"
+        label.textColor = UIColor.greenColor()
+        label.font = UIFont.boldSystemFontOfSize(20.0)
+        self.view .addSubview(label)
+        
+    }
+    
+    func btnOnTouched(btn: UIButton) {
+        btn.setImage(UIImage(named: "icon2"), forState: UIControlState.Normal)
+        let secView = SecViewController(nibName: nil, bundle: nil)
+        self .presentViewController(secView, animated: true) { () -> Void in
+            println(" presentView now .....")
+        }
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.view.backgroundColor = UIColor.brownColor()
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//        super.init(coder: aDecoder)
+         super.init(coder: aDecoder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.showSomeUI()
+        
         
         let aNum = 10         //*** 常量只能被赋值一次
         var varOne: Int?        //加上？ varOne可以为nil
