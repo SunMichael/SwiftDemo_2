@@ -64,6 +64,13 @@ class ViewController: UIViewController {
         self.showSomeUI()
         
         
+        let sharedInstance = MyManager4.sharedManager
+        println(" 单例SharedInstance \(sharedInstance)")
+        
+        let sharedInstance2 = MyManager4.sharedManager
+        println(" 2单例SharedInstance \(sharedInstance2)")
+        
+        
         let aNum = 10         //*** 常量只能被赋值一次
         var varOne: Int?        //加上？ varOne可以为nil
         var varTwo: Optional<Int>
@@ -577,7 +584,7 @@ class ViewController: UIViewController {
 
     }
     
-    func someTrailingBlick2(str: String,(Int ,String) ->String){
+    func someTrailingBlick2(str: String,(Int ,String) ->String){     //第2个参数为函数
         println("trailing str2 =\(str) ")
     }
     

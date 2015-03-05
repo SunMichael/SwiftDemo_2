@@ -89,7 +89,7 @@ struct IntStack : Container{           //将此例中的int 换成T 就是泛型
         return items.removeLast()
     }
     
-    // 遵循Container协议的实现
+    // 遵循Container协议的实现，将Int类型声明成 ItemType
     typealias ItemType = Int
     mutating func append(item: ItemType) {
         self.push(item)
@@ -223,22 +223,31 @@ struct TrackedString {
 }
 
 
-func addTwoNumbers(a: Int)(b: Int) ->Int{      //柯里化函数   一个函数传入一个Int然后输出作为另一个函数的输入，然后又返回一个Int
+func addTwoNumbers(a: Int)(b: Int) ->Int{      //柯里化函数 参数单独用括号  一个函数传入一个Int然后输出作为另一个函数的输入，然后又返回一个Int
     return a + b
 }
 
-func addTwoNumbers2(a: Int) ->(Int -> Int){
+func addTwoNumbers2(a: Int) ->(Int -> Int){       // <---柯里化函数示例
     func addTheSecondNumber(b: Int) ->Int{
         return a + b
     }
     return addTheSecondNumber
 }
 
+// var number = addTwoNumbers(1)           柯里化函数的使用，在使用相同参数重复调用某个方法时会很方便，可以理解为将函数分段执行
+// number(b: 4)
+
 //MARK: Attention 初始化顺序，子类必须先初始化成员变量再调用父类的初始化方法
 class Cat {
     var name: String
     init(){
         name = "cat"
+    }
+    func addTwoNumbers2(a: Int) ->(Int -> Int){       // <---柯里化函数示例
+        func addTheSecondNumber(b: Int) ->Int{
+            return a + b
+        }
+        return addTheSecondNumber
     }
 }
 class Tiger: Cat {
@@ -250,7 +259,7 @@ class Tiger: Cat {
     }
 }
 //MARK: 协议
-protocol MyProtocol {          // 在enum和struct中还是使用static  class中使用class
+protocol MyProtocol {          // 在enum和struct中还是使用static  class和protocol中使用class
     class func foo() ->String
 }
 struct MyStruct: MyProtocol {
@@ -302,6 +311,13 @@ extension Array {
     }
 }
 */
+
+extension NSString {
+    class func stringIsEmpty(str: NSString) ->Bool{
+        return str .isEqualToString("")
+    }
+}
+
 @objc(MyNewClass)       //加objc(CLASSNAME) 由于类名是提供给oc使用所以一定是英文
 class  MyNewClass {
     func method(number: Int) ->Int{

@@ -30,11 +30,19 @@ class MyManager2 {
     }
 }
 class MyManager {
-    class var sharedManager: MyManager {
+    class var sharedManager: MyManager {    //使用一个结构体来储存变量
         struct Static{
             static let sharedInstance: MyManager = MyManager()
         }
         return Static.sharedInstance
+    }
+}
+class MyManager4 {
+    class var sharedManager: MyManager4 {
+        return Static.sharedInstance
+    }
+    struct Static {
+        static let sharedInstance: MyManager4 = MyManager4()
     }
 }
 

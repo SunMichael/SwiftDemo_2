@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		392E58EE1AA8022B007917A1 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392E58ED1AA8022B007917A1 /* Utils.swift */; };
 		3950A0431A76483400031A11 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3950A0421A76483400031A11 /* Player.swift */; };
 		396755F51A8309DE004612C1 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396755F41A8309DE004612C1 /* Container.swift */; };
 		396755FB1A834213004612C1 /* CoderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 396755FA1A834213004612C1 /* CoderModel.m */; };
@@ -35,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		392BB39D1A845020000F5101 /* SwiftDemo-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SwiftDemo-Bridging-Header.h"; sourceTree = "<group>"; };
+		392E58ED1AA8022B007917A1 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		3950A0421A76483400031A11 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		396755F41A8309DE004612C1 /* Container.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		396755F91A834213004612C1 /* CoderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoderModel.h; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				396F20F91A709FC700A6A540 /* StudentClass.swift */,
 				3950A0421A76483400031A11 /* Player.swift */,
 				39B683A81A806E2000CC330B /* BlockFile.swift */,
+				392E58ED1AA8022B007917A1 /* Utils.swift */,
 				396755F41A8309DE004612C1 /* Container.swift */,
 				396755F91A834213004612C1 /* CoderModel.h */,
 				396755FA1A834213004612C1 /* CoderModel.m */,
@@ -244,6 +247,7 @@
 			files = (
 				3950A0431A76483400031A11 /* Player.swift in Sources */,
 				396755F51A8309DE004612C1 /* Container.swift in Sources */,
+				392E58EE1AA8022B007917A1 /* Utils.swift in Sources */,
 				396F20DC1A709F9600A6A540 /* ViewController.swift in Sources */,
 				396F20DA1A709F9600A6A540 /* AppDelegate.swift in Sources */,
 				39C737CD1AA1BA280013D5B8 /* SecViewController.swift in Sources */,
