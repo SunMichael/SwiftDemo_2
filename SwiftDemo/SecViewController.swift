@@ -10,8 +10,11 @@ import Foundation
 import UIKit
 class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,NSURLConnectionDelegate,NSURLConnectionDataDelegate{  // swift中协议的遵循 用逗号
     
-     var sImageView: UIImageView!
+    var sImageView: UIImageView = UIImageView(image: nil)
     var allData :NSMutableData = NSMutableData()
+    var arrayData: [String]!
+    
+    var viewCtl: ViewController!
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -20,12 +23,12 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     /*
     override init() {
-        super.init()
-        self.view.backgroundColor = UIColor.purpleColor()
+    super.init()
+    self.view.backgroundColor = UIColor.purpleColor()
     }
-*/
+    */
     required init(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
+        //        fatalError("init(coder:) has not been implemented")
         super.init(coder: aDecoder)
     }
     
@@ -51,28 +54,71 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         
         let width = UIScreen.mainScreen().bounds.width
         
-        var sTableView = UITableView(frame: CGRectMake(0, 150, width, 300), style: UITableViewStyle.Plain)
+        var sTableView = UITableView(frame: CGRectMake(0, 190, width, 300), style: UITableViewStyle.Plain)
         sTableView.delegate = self
         sTableView.dataSource = self
         self.view .addSubview(sTableView)
-//        if sTableView == nil {  //判断对象不能是可选值
+        //        if sTableView == nil {  //判断对象不能是可选值
         
-//        }
+        //        }
         
         //add a imageView
-        sImageView = UIImageView(frame: CGRectMake(230, 30, 100, 100))
-
-        self.view .addSubview(sImageView!)
+        //        sImageView = UIImageView(image: UIImage(named: "icon2"))
+        sImageView.frame = CGRectMake(230, 30, 100, 100)
+        self.view .addSubview(sImageView)
         
         
         self.showOrHideNavPrompt()
         self.addSomething()
         self.queueGroup()
-//        dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), { () -> Void in
-//            self.applyQueue()
+        
+        //        self.semaphore()
+        //        self.timeToCountDown(10)
+        arrayData  = ["水果","熟菜","主食","饮料","糕点"]
+        
+        //Printable 是可打印
+        let mixed: [Printable] = [1, "two" ,3]
+        for obj in mixed {
+            println(obj.description)
+        }
+        let mixed2 = [IntOrString.IntValue(1) ,IntOrString.StringValue("two"),IntOrString.IntValue(3)]
+       
+        for value in mixed2 {
+            switch value {
+            case let .IntValue(i):
+                println(i * 2)
+            case let .StringValue(string):
+                println(string.capitalizedString)
+            default :
+                println(" switch default")
+            }
+        }
+        let rect = UIScreen.mainScreen().bounds
+        
+//        UIView .animateWithDuration(3, animations: { () -> Void in
+//            self.view.frame = CGRectMake(self.view.frame.origin.x + 30, 0, rect.width, rect.height)
 //        })
-        self.semaphore()
+         viewCtl = ViewController(nibName: nil, bundle: nil)
+        viewCtl.view.frame  = self.view.bounds
+        NSTimer .scheduledTimerWithTimeInterval(2, target: self, selector: "changePosition", userInfo: nil, repeats: false)
+        
     }
+    
+    func changePosition(){
+        var view  = viewCtl.view
+        self.view .insertSubview(view, atIndex: 0)
+        var frame = self.view.frame
+        frame.origin.x = 30
+        UIView .animateWithDuration(0.5, animations: { () -> Void in
+            view.frame = frame
+        })
+    }
+    
+    enum IntOrString {
+        case IntValue(Int)
+        case StringValue(String)
+    }
+    
     
     func showOrHideNavPrompt() {
         let delayInSeconds = 1.0
@@ -81,7 +127,7 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             let count = 3
             if count > 0 {
                 println("执行延迟任务")
-                self.sImageView = nil
+                //                self.sImageView = nil
             }
         }
     }
@@ -141,7 +187,7 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         for var i = 0 ;i < 9; i++ {
             println(" semaphore  \(i) ")
             dispatch_group_async(groupQueue, globalQueue) { () -> Void in
-                 sleep(2)
+                sleep(2)
                 println("semaphore sleep")
                 dispatch_semaphore_signal(semaphore)
             }
@@ -151,23 +197,37 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         dispatch_async(GlobalMainQueue, { () -> Void in
             println(" Got semaphore ")
         })
-    //以上代码理解: 先wait消耗信号量到0，等待signal释放可用信号，再执行循环,每批次执行4次循环增加4个新线程
+        //以上代码理解: 先wait消耗信号量到0，等待signal释放可用信号，再执行循环,每批次执行4次循环增加4个新线程
     }
+    
+    func timeToCountDown(timeOut: Int){  //闭包和函数都是引用类型 原始值不能更改 需要使用拷贝
+        var time = timeOut
+        let queue = dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0)
+        let timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue)
+        dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC, 0)
+        dispatch_source_set_event_handler(timer, { () -> Void in
+            time = time - 1
+            println("Time Down == \(time)")
+            
+        })
+    }
+    
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return arrayData.count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let string = "cell"
         var cell: UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(string) as? UITableViewCell
         //此处要使用as?  代表可能有对象 会被转成uitableviewcell
         if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: string)
+            cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: string)
         }
         cell.textLabel.text = "Title"
+        cell.detailTextLabel?.text = arrayData[indexPath.row]
         return cell
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -188,19 +248,19 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         let url = NSURL(string: "http://t10.baidu.com/it/u=2380260024,2006255000&fm=58")
         
 //        let data = NSData(contentsOfURL: url!)
-//        sImageView?.image = UIImage(data: data!)
+//        sImageView.image = UIImage(data: data!)!
         
         let request = NSURLRequest(URL: url!, cachePolicy: NSURLRequestCachePolicy.ReloadRevalidatingCacheData, timeoutInterval: 10)
         
         let webConnection = NSURLConnection(request: request, delegate: self, startImmediately: false)
-//        webConnection?.scheduleInRunLoop(NSRunLoop .currentRunLoop(), forMode: NSRunLoopCommonModes)
+        webConnection?.scheduleInRunLoop(NSRunLoop .currentRunLoop(), forMode: NSRunLoopCommonModes)
         webConnection?.start()
         
         let timer = NSTimer(timeInterval: 10, target: self, selector: "requestTimeOut:", userInfo: nil, repeats: false)
     }
     
     func requestTimeOut(sender: NSTimer){
-//        self.connection(<#connection: NSURLConnection#>, didFailWithError: <#NSError#>)
+        //        self.connection(<#connection: NSURLConnection#>, didFailWithError: <#NSError#>)
         println("请求超时")
         sender .invalidate()
     }
@@ -212,25 +272,26 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         allData.appendData(data)
     }
     func connectionDidFinishLoading(connection: NSURLConnection) {
-        var image: UIImage? = UIImage(data: allData)
+        var image: UIImage! = UIImage(data: allData, scale: 1.0)
         //block在swift中 循环引用的处理？？？？
-//        let block = {[unowned self] () ->Void in
-//            self.sImageView?.image = image
-//        }
+        //        let block = {[unowned self] () ->Void in
+        //            self.sImageView?.image = image
+        //        }
+        sImageView.image = image
         //此处使用尾行闭包
         dispatch_async(dispatch_get_main_queue()) { [unowned self] () ->() in
             self.sImageView.image = image
-        
+            println(" 是否是主线程 \(NSThread.isMainThread())")
         }
-    println(" 是否是主线程 \(NSThread.isMainThread())")
-//     NSObject .performSelectorOnMainThread("showImage", withObject: nil, waitUntilDone: false)
-//     let thread = NSThread(target: self, selector: "showImage", object: nil)
-//     thread .start()
-     
+        
+        //     NSObject .performSelectorOnMainThread("showImage", withObject: nil, waitUntilDone: false)
+        //     let thread = NSThread(target: self, selector: "showImage", object: nil)
+        //     thread .start()
+        
     }
     
     func showImage(){
-        sImageView?.image = UIImage(data: allData)
+        sImageView.image = UIImage(data: allData)
     }
     
     func goBackView(sender: UITapGestureRecognizer) {

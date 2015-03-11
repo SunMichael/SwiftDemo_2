@@ -237,3 +237,36 @@ let c1: Int = {(a:Int ,b:Int) -> Int in
 }(5,5)
 
 
+
+@objc protocol RequestHandler {
+    optional func requestFinished()
+}
+
+class Request{
+    var delegate: RequestHandler!
+    
+    func send(){
+        println("发送请求")
+    }
+    
+    func gotResponse(){
+        println("收到请求响应")
+        delegate?.requestFinished?()
+    }
+}
+
+
+class RequestManager: RequestHandler {
+    func requestFinished() {
+        println("请求完成")
+    }
+    func sendRequest(){
+        let req = Request()
+        req.delegate = self
+        req.send()
+    }
+}
+
+
+
+

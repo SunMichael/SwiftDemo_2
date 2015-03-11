@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var xibLabel: UILabel!
+    
     var aStudent :Student!   //声明其他类的变量 不用像oc那样引入h文件 直接写？
     
     let sNum:Int!     // Int8 ,Int32, Int 数据类型   Int默认根据编译器—> Int32 或者 Int64
@@ -26,21 +28,22 @@ class ViewController: UIViewController {
         
         var button: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton       //枚举值和 结构体数据 的调用用点？
         button.frame = CGRectMake(100, 40, 100, 100)
-        button.setImage(UIImage(named: "icon"), forState: UIControlState.Normal)
+        button.setImage(UIImage(named: "icon2"), forState: UIControlState.Normal)
         button.addTarget(self, action: "btnOnTouched:", forControlEvents: UIControlEvents.TouchUpInside)
         self.view .addSubview(button)
         
         
-        label = UILabel(frame: CGRectMake(100, 180, 200, 30))
+        label = UILabel(frame: CGRectMake(100, 150, 200, 30))
         label.text = "This is a label"
         label.textColor = UIColor.greenColor()
         label.font = UIFont.boldSystemFontOfSize(20.0)
         self.view .addSubview(label)
         
+        
     }
     
     func btnOnTouched(btn: UIButton) {
-        btn.setImage(UIImage(named: "icon2"), forState: UIControlState.Normal)
+//        btn.setImage(UIImage(named: "icon2"), forState: UIControlState.Normal)
         let secView = SecViewController(nibName: nil, bundle: nil)
         self .presentViewController(secView, animated: true) { () -> Void in
             println(" presentView now .....")
@@ -50,6 +53,7 @@ class ViewController: UIViewController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.view.backgroundColor = UIColor.brownColor()
+        self.xibLabel?.text = "标签"
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -358,7 +362,7 @@ class ViewController: UIViewController {
     func GetList(arr:[Int] ,pre:(Int) ->Bool) ->[Int]{
         var tempArr = [Int]()
         for temp in arr {
-            if pre(temp){
+            if pre(temp){        //
                 tempArr.append(temp)
             }
         }
