@@ -10,8 +10,10 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var testTextField: UITextField!
     @IBOutlet weak var xibLabel: UILabel!
     
+    @IBOutlet weak var viewForLayer: UIView!
     var aStudent :Student!   //声明其他类的变量 不用像oc那样引入h文件 直接写？
     
     let sNum:Int!     // Int8 ,Int32, Int 数据类型   Int默认根据编译器—> Int32 或者 Int64
@@ -39,15 +41,20 @@ class ViewController: UIViewController {
         label.font = UIFont.boldSystemFontOfSize(20.0)
         self.view .addSubview(label)
         
+        self.title = "第一个界面"
         
     }
     
     func btnOnTouched(btn: UIButton) {
 //        btn.setImage(UIImage(named: "icon2"), forState: UIControlState.Normal)
         let secView = SecViewController(nibName: nil, bundle: nil)
-        self .presentViewController(secView, animated: true) { () -> Void in
-            println(" presentView now .....")
-        }
+//        self .presentViewController(secView, animated: true) { () -> Void in
+//            println(" presentView now .....")
+//        }
+//        let lineLayout = LineLayout()
+//        let secView =  FlowCardController(collectionViewLayout: LineLayout())
+        
+        self.navigationController?.pushViewController(secView, animated: true)
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -222,6 +229,13 @@ class ViewController: UIViewController {
         fun1(222,"KKKK")
         someTrailingBlick("Trailing Block", fun1)
         someTrailingBlick2("Trailing Block2", fun1)
+        
+        
+        
+//        setUpLayer()
+//        addSomeLayer()
+        replicatorLayer()
+        
     }
     
     func functionForView(str :NSString ,aNum: Int) ->NSString{
@@ -599,5 +613,113 @@ class ViewController: UIViewController {
     }
     
     
+    var l :CALayer {
+        return viewForLayer.layer
+    }
+    
+    func setUpLayer(){
+        l.backgroundColor = UIColor.blueColor().CGColor
+        l.borderColor = UIColor.redColor().CGColor
+        l.borderWidth = 100.0
+        l.shadowOpacity = 0.7
+        l.shadowRadius = 10.0
+        l.contents = UIImage(named: "icon")?.CGImage
+        l.contentsGravity = kCAGravityCenter
+        
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: "pinchGestureRecoginzed:")
+        viewForLayer.addGestureRecognizer(pinchGesture)
+        
+    }
+    func pinchGestureRecoginzed(sender: UIPinchGestureRecognizer){
+        let offset: CGFloat = sender.scale < 1 ? 5.0 : -5.0
+        let oldFrame = l.frame
+        let oldOrigin = oldFrame.origin
+        let newOrigin = CGPointMake(oldOrigin.x + offset, oldOrigin.y + offset)
+        let newSize = CGSizeMake(oldFrame.width + (offset * -2.0), oldFrame.height + (offset * -2.0))
+        let newFrame = CGRect(origin: newOrigin, size: newSize)
+        if newFrame.width >= 100.0 && newFrame.width <= 300.0{
+            l.borderWidth = offset
+            l.cornerRadius += offset / 2.0
+            l.frame = newFrame
+        }
+    }
+    func addSomeLayer(){
+        let layer = CALayer()
+        layer.frame = CGRectMake(0, 0, 300, 300)
+        layer.contents = UIImage(named: "icon")?.CGImage
+        layer.contentsGravity = kCAGravityCenter
+        layer.magnificationFilter = kCAFilterLinear      //使用过滤器，过滤器在图像利用contentsGravity放大时发挥作用，可用于改变大小（缩放、比例缩放、填充比例缩放）和位置（中心、上、右上、右等等）。以上属性的改变没有动画效果
+        layer.geometryFlipped = false       // 设置几何和阴影会上下颠倒
+        layer.backgroundColor = UIColor(red: 11/255.0, green: 86/255.0, blue: 14/255.0, alpha: 1.0).CGColor
+        layer.opacity = 1.0
+        layer.hidden = false
+        layer.masksToBounds = false
+        layer.cornerRadius = 150.0
+        layer.borderWidth = 12.0
+        layer.borderColor = UIColor.whiteColor().CGColor
+        layer.shadowOpacity = 0.75
+        layer.shadowOffset = CGSizeMake(0, 3)
+        layer.shadowRadius = 3.0
+        l .addSublayer(layer)
+    }
+    
+    func replicatorLayer(){     // CAReplicatorLayer 能够以特定的次数复制图层
+        
+        
+        var view = UIView(frame: CGRectMake(175, 80, 250, 250))
+        view.backgroundColor = UIColor.whiteColor()
+        view.center = self.view.center
+        self.view .addSubview(view)
+        
+        let replicatorLayer = CAReplicatorLayer()
+//        replicatorLayer.frame  = CGRectMake(0, 0, 10,30)
+        replicatorLayer.frame = view.bounds
+        
+        replicatorLayer.instanceCount = 30
+        replicatorLayer.instanceDelay = CFTimeInterval(1 / 30)
+        replicatorLayer.preservesDepth = false
+        replicatorLayer.instanceColor = UIColor.whiteColor().CGColor
+        
+        replicatorLayer.instanceRedOffset = 0.0
+        replicatorLayer.instanceGreenOffset = -0.5
+        replicatorLayer.instanceBlueOffset = -0.5
+        replicatorLayer.instanceAlphaOffset = 0.0
+       
+        view.layer.addSublayer(replicatorLayer)
+       
+        let angle = Float(M_PI * 2.0) / 30
+        replicatorLayer.instanceTransform  = CATransform3DMakeRotation(CGFloat(angle), 0.0, 0.0, 1.0)
+        
+        
+        let instanceLayer = CALayer()
+        let layerWidth: CGFloat = 10.0
+        let midX = CGRectGetMidX(view.bounds) - layerWidth / 2.0
+        instanceLayer.frame = CGRectMake(midX, 0.0, layerWidth, layerWidth * 3)
+        instanceLayer.backgroundColor = UIColor.whiteColor().CGColor
+        replicatorLayer.addSublayer(instanceLayer)
+        
+        let fadeAnimation = CABasicAnimation(keyPath: "opacity")
+        fadeAnimation.fromValue = 1.0
+        fadeAnimation.toValue = 0.0
+        fadeAnimation.repeatCount = Float(Int.max)
+        
+        fadeAnimation.duration = CFTimeInterval(1)
+        instanceLayer.opacity = 0.0
+        instanceLayer.addAnimation(fadeAnimation, forKey: "FadeAnimation")
+        
+    }
+    
+    
+    
+    
+    
 }
+
+
+
+
+
+
+
+
 

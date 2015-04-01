@@ -325,9 +325,17 @@ class  MyNewClass {
     }
 }
 
-
-
-
+// swift 支持 class func 但暂不支持class var 或者 class let 可以使用结构体代替解决
+class TeamClass {
+    struct Constans {
+        static let name = "TeamClass"
+    }
+    struct Variables {
+        static var age = 0
+    }
+}
+// TeamClass.Constans.name
+// TeamClass.Variables.age
 
 
 

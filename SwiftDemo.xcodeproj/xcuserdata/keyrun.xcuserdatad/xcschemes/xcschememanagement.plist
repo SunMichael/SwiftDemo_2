@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Calculator.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>SwiftDemo.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -18,6 +23,16 @@
 			<true/>
 		</dict>
 		<key>396F20E81A709F9600A6A540</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>39A4B8F81AB2CF8C0029B086</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>39A4B90A1AB2D01D0029B086</key>
 		<dict>
 			<key>primary</key>
 			<true/>

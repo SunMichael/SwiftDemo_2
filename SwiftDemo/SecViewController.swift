@@ -14,7 +14,23 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     var allData :NSMutableData = NSMutableData()
     var arrayData: [String]!
     
+    var sTableView: UITableView!
     var viewCtl: ViewController!
+    
+    var animator:UIDynamicAnimator? = nil
+    let gravity = UIGravityBehavior()
+    let collider = UICollisionBehavior()
+    var request: NSURLRequest?
+    
+    func createAnimatorStuff(){
+        animator = UIDynamicAnimator(referenceView: self.view)
+        collider .addItem(sImageView)
+        gravity.addItem(sImageView)
+        gravity.gravityDirection = CGVectorMake(0, 0.8)
+        collider.translatesReferenceBoundsIntoBoundary = true
+        animator?.addBehavior(collider)
+        animator?.addBehavior(gravity)
+    }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -31,10 +47,39 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         //        fatalError("init(coder:) has not been implemented")
         super.init(coder: aDecoder)
     }
-    
+    func checkCacheData(){
+        let url = NSURL(string: "http://img6.cache.netease.com/cnews/2012/6/1/20120601085505e3aba.jpg")
+        
+        request = NSURLRequest(URL: url!, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 10)
+        
+        let cache = NSURLCache.sharedURLCache()
+        let response = cache.cachedResponseForRequest(request!)
+        if response == nil {
+            println("no cache")
+        }else{
+            println("exsit cache ==\(response?.data.length)")
+            cache.removeCachedResponseForRequest(request!)
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.sImageView.image = UIImage(data: response!.data)
+            })
+            
+            
+        }
+
+    }
     override func viewDidLoad() {
+        
+        
+        
+        self.title = "第二个界面"
+        let addBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "editData")
+        
+        let deleteBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Edit, target: self, action: "editData")
+        self.navigationItem.rightBarButtonItems = [addBtn ,deleteBtn ]
+        
+        
         var backImage = UIImageView(image: UIImage(named: "icon"), highlightedImage: nil)
-        backImage.frame = CGRectMake(100, 30, 100, 100)
+        backImage.frame = CGRectMake(100, 60, 100, 100)
         self.view .addSubview(backImage)
         backImage.userInteractionEnabled = true
         // attention: ui interaction default is no
@@ -54,7 +99,7 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         
         let width = UIScreen.mainScreen().bounds.width
         
-        var sTableView = UITableView(frame: CGRectMake(0, 190, width, 300), style: UITableViewStyle.Plain)
+        sTableView = UITableView(frame: CGRectMake(0, 190, width, 300), style: UITableViewStyle.Plain)
         sTableView.delegate = self
         sTableView.dataSource = self
         self.view .addSubview(sTableView)
@@ -64,7 +109,8 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         
         //add a imageView
         //        sImageView = UIImageView(image: UIImage(named: "icon2"))
-        sImageView.frame = CGRectMake(230, 30, 100, 100)
+        sImageView.frame = CGRectMake(230, 60, 100, 100)
+        sImageView.image = UIImage(named: "icon2")
         self.view .addSubview(sImageView)
         
         
@@ -100,10 +146,121 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
 //        })
          viewCtl = ViewController(nibName: nil, bundle: nil)
         viewCtl.view.frame  = self.view.bounds
-        NSTimer .scheduledTimerWithTimeInterval(2, target: self, selector: "changePosition", userInfo: nil, repeats: false)
+//        NSTimer .scheduledTimerWithTimeInterval(2, target: self, selector: "changePosition", userInfo: nil, repeats: false)
+        let refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "下拉刷新")
+        refreshControl.addTarget(self, action: "loadDataSource", forControlEvents: UIControlEvents.ValueChanged)
+//        UITableViewController
+        
+         createAnimatorStuff()
+         generateBoxes()
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+            self.checkCacheData()
+        })
+         
+        
+        
         
     }
     
+    func addRefreshControl(){
+        var refresh = UIRefreshControl()
+        refresh.addTarget(self, action: "sortArray", forControlEvents: UIControlEvents.ValueChanged)
+        
+    }
+    
+    
+    
+    var maxX : CGFloat  = 320
+    var maxY : CGFloat  = 320
+    let boxSize : CGFloat = 30.0
+    var boxes : [UIView] = []
+    
+    func randomFrame() ->CGRect{
+        var guess = CGRectMake(9, 9, 9, 9)
+        do {
+        let guessX = CGFloat(arc4random()) % maxX
+        let guessY = CGFloat(arc4random()) % maxY
+        guess = CGRectMake(guessX, guessY, boxSize, boxSize)
+        }while(!doesNotCollide(guess))
+        return guess
+    }
+    
+    func doesNotCollide(rect: CGRect) -> Bool{
+        for box in boxes {
+            var viewRect = box.frame
+            if CGRectIntersectsRect(rect, viewRect){
+                return false
+            }
+        }
+        return true
+    }
+    func randomColor() ->UIColor{
+        let red = CGFloat(CGFloat(arc4random() % 10000) / 10000)
+        let green = CGFloat(CGFloat(arc4random() % 10000) / 10000)
+        let blue = CGFloat(CGFloat(arc4random() % 10000) / 10000)
+        
+        return UIColor(red: red, green: green, blue: blue, alpha: 0.8)
+        
+    }
+    
+    func generateBoxes(){
+        for i in 0...10 {
+            var frame = randomFrame()
+            var color = randomColor()
+            var newbox = addBox(frame, color: color)
+        }
+    }
+    
+    func addBox(frame: CGRect , color: UIColor) -> UIView{
+        let newbox = UIView(frame: frame)
+        newbox.backgroundColor = UIColor.redColor()
+        newbox.backgroundColor = color
+        self.view .addSubview(newbox)
+        addBoxBehaviors(newbox)
+        boxes.append(newbox)
+        return newbox
+        
+    }
+    func addBoxBehaviors(box: UIView){
+        gravity.addItem(box)
+        collider.addItem(box)
+    }
+    
+    func editData(){
+        sTableView.setEditing(!sTableView.editing, animated: true)
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        switch editingStyle {
+        case .Delete:
+            arrayData.removeAtIndex(indexPath.row)
+            sTableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
+        case .Insert:
+            self.addSomeData()
+        default:
+            return
+        }
+    }
+    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        if indexPath.row == 0 {
+            return UITableViewCellEditingStyle.Delete
+        }else{
+        
+            return UITableViewCellEditingStyle.Insert
+        }
+    }
+    func addSomeData(){
+        let date = NSDate()
+        let formatter = NSDateFormatter()
+        formatter.timeStyle = NSDateFormatterStyle.FullStyle
+        let desDate = formatter.stringFromDate(date)
+        println("date now is \(desDate)")
+        arrayData.append(desDate)
+        let path = NSIndexPath(forRow: arrayData.count - 1, inSection: 0)
+        sTableView.insertRowsAtIndexPaths([path], withRowAnimation: UITableViewRowAnimation.Fade)
+        
+    }
     func changePosition(){
         var view  = viewCtl.view
         self.view .insertSubview(view, atIndex: 0)
@@ -227,6 +384,7 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: string)
         }
         cell.textLabel.text = "Title"
+
         cell.detailTextLabel?.text = arrayData[indexPath.row]
         return cell
     }
@@ -245,14 +403,21 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         }
     }
     func getImageFromService(){
-        let url = NSURL(string: "http://t10.baidu.com/it/u=2380260024,2006255000&fm=58")
         
-//        let data = NSData(contentsOfURL: url!)
-//        sImageView.image = UIImage(data: data!)!
+        NSURLConnection.sendAsynchronousRequest(request!, queue: NSOperationQueue.currentQueue()) { response, data, error -> Void in
+            println("Request response == \(response)")
+            if (error != nil) {
+                println("Request Error == \(error)")
+            }else{
+                let image = UIImage(data: data)
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.sImageView.image = image
+                })
+                
+            }
+        }
         
-        let request = NSURLRequest(URL: url!, cachePolicy: NSURLRequestCachePolicy.ReloadRevalidatingCacheData, timeoutInterval: 10)
-        
-        let webConnection = NSURLConnection(request: request, delegate: self, startImmediately: false)
+        let webConnection = NSURLConnection(request: request!, delegate: self, startImmediately: false)
         webConnection?.scheduleInRunLoop(NSRunLoop .currentRunLoop(), forMode: NSRunLoopCommonModes)
         webConnection?.start()
         
@@ -295,11 +460,23 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     }
     
     func goBackView(sender: UITapGestureRecognizer) {
-        
+      /*
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
             let dic = NSDictionary(objectsAndKeys: "NOTIFICATION", "KEY" )
             NSNotificationCenter .defaultCenter() .postNotificationName("Change", object: nil, userInfo: dic)
         })
-        
+        */
+        self.navigationController?.popViewControllerAnimated(true)
+        // switch fallthrough
+        let number = 6
+        var string = ""
+        switch number {
+        case 2,4,6,8:
+            string += "a prime number"
+            fallthrough
+        default :
+            string += "also an Integer"
+        }
+        println(string)     // fallthrough 会让语句在执行一个case后继续执行
     }
 }

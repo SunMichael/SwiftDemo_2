@@ -145,13 +145,37 @@ extension Double {
 }
 
 
+func sayHello( str1: String = "Hello",str2: String,str3: String){   //swift支持函数参数有默认值
+    println(str1 + str2 + str3)
+}
+
+func sayHello2(str1: String,str2: String,str3: String = "World"){  //默认参数都是需要外部标签的，如果没有指定外部标签，那么 Swift 会默认自动加上同名的标签
+    println(str1 + str2 + str3)
+}
+
+func testForDefaultValue(){
+//    sayHello( str2: "", str3:"World")
+//    sayHello2("Hello", str2: "")
+//    输出都是Hello World  目前的xcode不支持 省略带默认值的参数
+}
 
 
-
-
-
-
-
+struct RegexHelper {
+    let regex: NSRegularExpression?
+    init(pattern: String) {
+        var error: NSError?
+        regex = NSRegularExpression(pattern: pattern, options: NSRegularExpressionOptions.CaseInsensitive, error: &error)
+    }
+    func match(input: String) ->Bool {
+        let length = countElements(input)      //swift 获取String的长度方法 
+        if let matches = regex?.matchesInString(input, options: nil, range: NSMakeRange(0, input.utf16Count)) {
+            return matches.count > 0
+        }else{
+            return false
+        }
+        
+    }
+}
 
 
 

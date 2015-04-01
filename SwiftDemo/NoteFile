@@ -145,5 +145,10 @@ recursion(小规模);     //go;
 }
 
 
+N26: 在使用view的缩放的时候，layer.border.width随着view的放大，会出现锯齿化的问题，解决这个问题需要设置这个属性。
+self.layer.allowsEdgeAntialiasing = YES;
+
+N27: viewDebuging中有showViewFrame 和ShowAlignmentRects,可以在xcode上显示视图的frame大小
+
 
 

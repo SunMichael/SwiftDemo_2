@@ -27,3 +27,30 @@ var GlobalUtilityQueue: dispatch_queue_t {
 var GlobalBackgroundQueue: dispatch_queue_t {
    return dispatch_get_global_queue((Int)(QOS_CLASS_BACKGROUND.value), 0)
 }
+
+
+enum Result {
+    case Error(NSError)
+    case Value(NSDictionary)
+    init (error: NSError? , dictionary :NSDictionary){
+        if (error != nil) {
+            self = Result.Error(error!)
+        }else{
+            self = Result.Value(dictionary)
+        }
+    }
+}
+
+prefix operator ~/ {}           //定义一个运算符
+prefix func ~/(pattern: String) -> NSRegularExpression{
+    return NSRegularExpression(pattern: pattern, options: nil, error: nil)!
+}
+
+func ~=(pattern: NSRegularExpression, input: String) ->Bool{      //重载 模式匹配 ~= 操作符
+    return pattern.numberOfMatchesInString(input, options: nil, range: NSRange(location: 0, length: input.utf16Count)) > 0
+}
+
+
+
+
+

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <AFNetworking/AFNetworking.h>
 
 //在oc中使用swift 需要写PRODUCT NAME -swift.h ，在swift中使用oc 需要在生产的bridging-Header中写
 
