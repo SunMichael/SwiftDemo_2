@@ -14,6 +14,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var xibLabel: UILabel!
     
     @IBOutlet weak var viewForLayer: UIView!
+    @IBOutlet weak var customImage: CustomImageView!
+    
+    let transition = PopAnimator()
+    
     var aStudent :Student!   //声明其他类的变量 不用像oc那样引入h文件 直接写？
     
     let sNum:Int!     // Int8 ,Int32, Int 数据类型   Int默认根据编译器—> Int32 或者 Int64
@@ -234,8 +238,8 @@ class ViewController: UIViewController {
         
 //        setUpLayer()
 //        addSomeLayer()
-        replicatorLayer()
-        
+//        replicatorLayer()
+//        makeCustomPopAnimation()
     }
     
     func functionForView(str :NSString ,aNum: Int) ->NSString{
@@ -710,9 +714,20 @@ class ViewController: UIViewController {
     }
     
     
+    func makeCustomPopAnimation(){
+        let tapGuest = UITapGestureRecognizer(target: self, action: "clickedImage")
+        self.customImage.userInteractionEnabled = true
+        self.customImage.addGestureRecognizer(tapGuest)
+    }
     
+    func clickedImage(){       //makePopAnimation
+        let popView = SecViewController(nibName: nil, bundle: nil)
+//        popView.transitioningDelegate = self
+    }
     
-    
+//    extension ViewController: UIViewControllerTransitioningDelegate{
+//        func ani
+//    }
 }
 
 

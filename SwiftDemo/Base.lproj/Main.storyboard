@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="pWn-gR-Wca">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -18,7 +19,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8xZ-wB-gMf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-829.5" y="9.75"/>
+            <point key="canvasLocation" x="-2018" y="163"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
@@ -42,6 +43,18 @@
                                     <rect key="frame" x="252" y="9" width="132" height="52"/>
                                 </variation>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dTy-bm-e3U" customClass="CustomImageView" customModule="SwiftDemo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="295" width="600" height="219"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="MWt-e9-al6"/>
+                                    <constraint firstAttribute="height" constant="219" id="N0h-1e-SKy"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="MWt-e9-al6"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QyV-aI-YQa">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -62,7 +75,7 @@
                                     <segue destination="PxM-jR-bK2" kind="push" id="7LC-JU-DPf"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hUP-rA-Fql">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hUP-rA-Fql">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -87,8 +100,21 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="centerX" secondItem="dTy-bm-e3U" secondAttribute="centerX" id="66v-R4-SQB"/>
+                            <constraint firstAttribute="centerX" secondItem="dTy-bm-e3U" secondAttribute="centerX" id="ApM-fl-LM8"/>
+                            <constraint firstAttribute="centerY" secondItem="dTy-bm-e3U" secondAttribute="centerY" id="B9g-xN-BCh"/>
+                            <constraint firstItem="dTy-bm-e3U" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" id="GQV-4K-Vb2"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="dTy-bm-e3U" secondAttribute="bottom" constant="86" id="JMQ-ff-oll"/>
+                            <constraint firstItem="dTy-bm-e3U" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="K8z-Sr-vgA"/>
+                            <constraint firstAttribute="centerY" secondItem="dTy-bm-e3U" secondAttribute="centerY" id="RdD-Tp-Ogi"/>
+                            <constraint firstAttribute="centerX" secondItem="dTy-bm-e3U" secondAttribute="centerX" id="Zge-u4-oze"/>
                             <constraint firstAttribute="centerX" secondItem="hUP-rA-Fql" secondAttribute="centerX" id="c3H-WR-Y4P"/>
+                            <constraint firstAttribute="trailing" secondItem="dTy-bm-e3U" secondAttribute="trailing" id="cbi-zv-R2S"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="dTy-bm-e3U" secondAttribute="bottom" constant="86" id="gd3-Rd-aj2"/>
                             <constraint firstAttribute="centerY" secondItem="hUP-rA-Fql" secondAttribute="centerY" id="kHK-1K-cqk"/>
+                            <constraint firstAttribute="centerY" secondItem="dTy-bm-e3U" secondAttribute="centerY" id="noP-sz-Mad"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dTy-bm-e3U" secondAttribute="trailing" constant="-16" id="rym-aw-30K"/>
+                            <constraint firstItem="dTy-bm-e3U" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="tOJ-fN-Ynp"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -97,6 +123,16 @@
                                 <exclude reference="hUP-rA-Fql"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="66v-R4-SQB"/>
+                                <exclude reference="ApM-fl-LM8"/>
+                                <exclude reference="GQV-4K-Vb2"/>
+                                <exclude reference="K8z-Sr-vgA"/>
+                                <exclude reference="RdD-Tp-Ogi"/>
+                                <exclude reference="Zge-u4-oze"/>
+                                <exclude reference="noP-sz-Mad"/>
+                                <exclude reference="rym-aw-30K"/>
+                                <exclude reference="JMQ-ff-oll"/>
+                                <exclude reference="gd3-Rd-aj2"/>
                                 <exclude reference="c3H-WR-Y4P"/>
                                 <exclude reference="kHK-1K-cqk"/>
                             </mask>
@@ -115,6 +151,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="cfi-Rf-QzY"/>
                     <connections>
+                        <outlet property="customImage" destination="dTy-bm-e3U" id="sUA-QT-O4S"/>
                         <outlet property="testTextField" destination="QyV-aI-YQa" id="EZO-zf-hAB"/>
                         <outlet property="viewForLayer" destination="hUP-rA-Fql" id="ZAq-hk-lIQ"/>
                         <outlet property="xibLabel" destination="fxk-KQ-s6z" id="dx4-x8-0br"/>
@@ -122,7 +159,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-79.5" y="50.25"/>
+            <point key="canvasLocation" x="-853" y="-65"/>
         </scene>
         <!--Collection View Controller-->
         <scene sceneID="uGY-N5-yJA">
