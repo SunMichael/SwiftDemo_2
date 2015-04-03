@@ -43,7 +43,7 @@
                                     <rect key="frame" x="252" y="9" width="132" height="52"/>
                                 </variation>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dTy-bm-e3U" customClass="CustomImageView" customModule="SwiftDemo" customModuleProvider="target">
+                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dTy-bm-e3U" customClass="CustomImageView" customModule="SwiftDemo" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="295" width="600" height="219"/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="MWt-e9-al6"/>

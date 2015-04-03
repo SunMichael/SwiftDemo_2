@@ -8,6 +8,7 @@
 
 
 //From: http://www.raywenderlich.com/94302/implement-circular-image-loader-animation-cashapelayer
+//CALayer动画
 import Foundation
 
 class CustomImageView: UIImageView {

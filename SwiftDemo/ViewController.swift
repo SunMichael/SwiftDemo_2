@@ -58,7 +58,8 @@ class ViewController: UIViewController {
 //        let lineLayout = LineLayout()
 //        let secView =  FlowCardController(collectionViewLayout: LineLayout())
         
-        self.navigationController?.pushViewController(secView, animated: true)
+//        self.navigationController?.pushViewController(secView, animated: true)
+        clickedImage()
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -239,7 +240,7 @@ class ViewController: UIViewController {
 //        setUpLayer()
 //        addSomeLayer()
 //        replicatorLayer()
-//        makeCustomPopAnimation()
+
     }
     
     func functionForView(str :NSString ,aNum: Int) ->NSString{
@@ -620,7 +621,7 @@ class ViewController: UIViewController {
     var l :CALayer {
         return viewForLayer.layer
     }
-    
+    //http://www.raywenderlich.com/90488/calayer-in-ios-with-swift-10-examples
     func setUpLayer(){
         l.backgroundColor = UIColor.blueColor().CGColor
         l.borderColor = UIColor.redColor().CGColor
@@ -714,23 +715,34 @@ class ViewController: UIViewController {
     }
     
     
-    func makeCustomPopAnimation(){
-        let tapGuest = UITapGestureRecognizer(target: self, action: "clickedImage")
-        self.customImage.userInteractionEnabled = true
-        self.customImage.addGestureRecognizer(tapGuest)
-    }
+//    func makeCustomPopAnimation(){
+//        var tapGuest = UITapGestureRecognizer(target: self, action: "clickedImage")
+//        customImage.userInteractionEnabled = true
+//        customImage.addGestureRecognizer(tapGuest)
+//    }
     
     func clickedImage(){       //makePopAnimation
         let popView = SecViewController(nibName: nil, bundle: nil)
-//        popView.transitioningDelegate = self
+        popView.transitioningDelegate = self
+//       self.navigationController!.pushViewController(popView, animated: true)
+        presentViewController(popView, animated: true, completion: nil)
     }
     
-//    extension ViewController: UIViewControllerTransitioningDelegate{
-//        func ani
-//    }
+    
 }
 
+extension ViewController: UIViewControllerTransitioningDelegate {
+    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.originFrame = customImage!.superview!.convertRect(customImage.frame, toView: nil)
 
+        transition.presenting = true
+        return transition
+    }
+    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+       transition.presenting = false
+        return transition
+    }
+}
 
 
 

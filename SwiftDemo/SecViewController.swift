@@ -466,7 +466,8 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             NSNotificationCenter .defaultCenter() .postNotificationName("Change", object: nil, userInfo: dic)
         })
         */
-        self.navigationController?.popViewControllerAnimated(true)
+//        self.navigationController?.popViewControllerAnimated(true)
+        dismissViewControllerAnimated(true, completion: nil)
         // switch fallthrough
         let number = 6
         var string = ""

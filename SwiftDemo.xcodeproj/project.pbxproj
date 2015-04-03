@@ -24,6 +24,7 @@
 		39A4B9131AB2D01D0029B086 /* Calculator.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 39A4B90B1AB2D01D0029B086 /* Calculator.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		39A4B9181AB2D04C0029B086 /* Calculator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39A4B9171AB2D04C0029B086 /* Calculator.xib */; };
 		39A7557E1AB7C6460079B997 /* FlowCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A7557D1AB7C6460079B997 /* FlowCardController.swift */; };
+		39A8F4CF1ACE2AAB0072CB11 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A8F4CE1ACE2AAB0072CB11 /* CustomView.swift */; };
 		39AB57421ACCE71A0040D08A /* PopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AB57411ACCE71A0040D08A /* PopAnimator.swift */; };
 		39AD85B11ACB93C600CEF90F /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 39AD85951ACB93C600CEF90F /* NSData+ImageContentType.m */; };
 		39AD85B21ACB93C600CEF90F /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 39AD85971ACB93C600CEF90F /* SDImageCache.m */; };
@@ -102,6 +103,7 @@
 		39A4B90F1AB2D01D0029B086 /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		39A4B9171AB2D04C0029B086 /* Calculator.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Calculator.xib; sourceTree = "<group>"; };
 		39A7557D1AB7C6460079B997 /* FlowCardController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowCardController.swift; sourceTree = "<group>"; };
+		39A8F4CE1ACE2AAB0072CB11 /* CustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		39AB57411ACCE71A0040D08A /* PopAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopAnimator.swift; sourceTree = "<group>"; };
 		39AD85941ACB93C600CEF90F /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
 		39AD85951ACB93C600CEF90F /* NSData+ImageContentType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+ImageContentType.m"; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				39AD85BF1ACB93E300CEF90F /* CustomImageView.swift */,
 				39AD85C11ACB994F00CEF90F /* CircularLoaderView.swift */,
 				39AB57411ACCE71A0040D08A /* PopAnimator.swift */,
+				39A8F4CE1ACE2AAB0072CB11 /* CustomView.swift */,
 				396755F91A834213004612C1 /* CoderModel.h */,
 				396755FA1A834213004612C1 /* CoderModel.m */,
 				396F20DD1A709F9600A6A540 /* Main.storyboard */,
@@ -499,6 +502,7 @@
 				39AD85BB1ACB93C600CEF90F /* UIImage+MultiFormat.m in Sources */,
 				396F20DA1A709F9600A6A540 /* AppDelegate.swift in Sources */,
 				39C737CD1AA1BA280013D5B8 /* SecViewController.swift in Sources */,
+				39A8F4CF1ACE2AAB0072CB11 /* CustomView.swift in Sources */,
 				39AD85B91ACB93C600CEF90F /* UIButton+WebCache.m in Sources */,
 				396F20FA1A709FC700A6A540 /* StudentClass.swift in Sources */,
 				39AD85B21ACB93C600CEF90F /* SDImageCache.m in Sources */,

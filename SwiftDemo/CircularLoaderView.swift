@@ -58,7 +58,7 @@ class CircularLoaderView: UIView {
         progress = 0
         circlePathLayer.frame = bounds
         circlePathLayer.lineWidth = 2
-        circlePathLayer.fillColor = UIColor.greenColor().CGColor
+        circlePathLayer.fillColor = UIColor.clearColor().CGColor
         circlePathLayer.strokeColor = UIColor.redColor().CGColor
         layer.addSublayer(circlePathLayer)
         backgroundColor = UIColor.whiteColor()
