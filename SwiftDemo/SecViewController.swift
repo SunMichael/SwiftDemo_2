@@ -102,6 +102,7 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         sTableView = UITableView(frame: CGRectMake(0, 190, width, 300), style: UITableViewStyle.Plain)
         sTableView.delegate = self
         sTableView.dataSource = self
+        sTableView.backgroundColor = UIColor.blackColor()
         self.view .addSubview(sTableView)
         //        if sTableView == nil {  //判断对象不能是可选值
         
@@ -378,13 +379,13 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let string = "cell"
-        var cell: UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(string) as? UITableViewCell
+        var cell: TableViewCell! = tableView.dequeueReusableCellWithIdentifier(string) as? TableViewCell
         //此处要使用as?  代表可能有对象 会被转成uitableviewcell
         if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: string)
+            cell = TableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: string)
         }
         cell.textLabel.text = "Title"
-
+        cell.selectionStyle = .None
         cell.detailTextLabel?.text = arrayData[indexPath.row]
         return cell
     }
@@ -396,12 +397,27 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         let sAlertView = UIAlertView(title: "Tips", message: "Clicked Cell", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "OK")
         sAlertView .show()
     }
+    
+    func colorForIndex(index: Int) ->UIColor{
+        let itemCount = arrayData.count - 1
+        let val = (CGFloat(index) / CGFloat(itemCount)) * 0.6
+        return UIColor(red: 1.0, green: val, blue: 0.0, alpha: 1.0)
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.backgroundColor = colorForIndex(indexPath.row)
+    }
+    
+ //MARK: -TableView delegate 
+
+    
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         println(" AlertViewButtonTag = \(buttonIndex)")
         if buttonIndex == 1 {
             self.getImageFromService()
         }
     }
+    
     func getImageFromService(){
         
         NSURLConnection.sendAsynchronousRequest(request!, queue: NSOperationQueue.currentQueue()) { response, data, error -> Void in
@@ -480,4 +496,76 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         }
         println(string)     // fallthrough 会让语句在执行一个case后继续执行
     }
+}
+
+//From :http://www.raywenderlich.com/77974/making-a-gesture-driven-to-do-list-app-like-clear-in-swift-part-1
+
+protocol TableViewCellDelegate{
+    func toDoItemDeleted()
+}
+class TableViewCell: UITableViewCell ,UIGestureRecognizerDelegate {
+    let gradientLayer = CAGradientLayer()  // CAGradientLayer可以方便的处理颜色渐变。
+    var originalCenter = CGPoint()
+    var deleteOnDragRelese = false
+    
+    var delegate: TableViewCellDelegate?
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        gradientLayer.frame = bounds
+        let color1 = UIColor(white: 1.0, alpha: 0.2).CGColor as CGColorRef
+        let color2 = UIColor(white: 1.0, alpha: 0.1).CGColor as CGColorRef
+        let color3 = UIColor.clearColor().CGColor as CGColorRef
+        let color4 = UIColor(white: 0.0, alpha: 0.1).CGColor as CGColorRef
+        gradientLayer.colors = [color1 ,color2 ,color3 ,color4]
+        gradientLayer.locations = [0.0 ,0.01,0.95,1.0]
+        layer.insertSublayer(gradientLayer, atIndex: 0)
+        
+        var recognizer = UIPanGestureRecognizer(target: self, action: "handlePan:")
+        recognizer.delegate = self
+        addGestureRecognizer(recognizer)
+        
+    }
+    required init(coder aDecoder: NSCoder) {
+        fatalError("")
+    }
+    func handlePan(recognizer: UIPanGestureRecognizer){
+        if recognizer.state == UIGestureRecognizerState.Began{
+            originalCenter = center
+        }
+        if recognizer.state == UIGestureRecognizerState.Changed {
+            let transiation = recognizer.translationInView(self)
+            center = CGPointMake(originalCenter.x + transiation.x, originalCenter.y)
+            deleteOnDragRelese = frame.origin.x < -(CGFloat(frame.size.width) / 2)
+        }
+        if recognizer.state == UIGestureRecognizerState.Ended {
+            let originalFrame = CGRect(x: 0, y: frame.origin.y, width: bounds.width, height: bounds.height)
+            if !deleteOnDragRelese {
+                UIView.animateWithDuration(0.2, animations: { () -> Void in
+                    self.frame = originalFrame
+                })
+            }
+            if deleteOnDragRelese {
+                if delegate != nil {
+                    delegate!.toDoItemDeleted()
+                }
+            }
+        }
+    }
+    override func layoutSubviews() {
+       super.layoutSubviews()
+        gradientLayer.frame = bounds
+    }
+    // 判断手势是左右滑动 还是 上下滑动
+    override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if let panGestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
+            let transiation = panGestureRecognizer.translationInView(superview!)
+            if fabs(transiation.x) > fabs(transiation.y) {
+                return true
+            }
+            return false
+        }
+        return false
+    }
+    
 }
