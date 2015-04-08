@@ -8,7 +8,8 @@
 
 import Foundation
 import UIKit
-class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,NSURLConnectionDelegate,NSURLConnectionDataDelegate{  // swift中协议的遵循 用逗号
+import QuartzCore
+class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,NSURLConnectionDelegate,NSURLConnectionDataDelegate ,TableViewCellDelegate ,UIScrollViewDelegate{  // swift中协议的遵循 用逗号
     
     var sImageView: UIImageView = UIImageView(image: nil)
     var allData :NSMutableData = NSMutableData()
@@ -21,6 +22,11 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     let gravity = UIGravityBehavior()
     let collider = UICollisionBehavior()
     var request: NSURLRequest?
+    
+    
+    let placeHolderCell = TableViewCell(style: .Default, reuseIdentifier: "cell")
+    var pullDownInProgress = false
+    
     
     func createAnimatorStuff(){
         animator = UIDynamicAnimator(referenceView: self.view)
@@ -103,6 +109,7 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         sTableView.delegate = self
         sTableView.dataSource = self
         sTableView.backgroundColor = UIColor.blackColor()
+        sTableView.rowHeight = 50.0
         self.view .addSubview(sTableView)
         //        if sTableView == nil {  //判断对象不能是可选值
         
@@ -370,7 +377,42 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         })
     }
     
+//MARK: ScrollViewDelegateMethod  下拉增加Item
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+       pullDownInProgress = scrollView.contentOffset.y <= 0.0
+       placeHolderCell.backgroundColor = UIColor.redColor()
+        if pullDownInProgress {
+            sTableView.insertSubview(placeHolderCell, atIndex: 0)  //在Tableview底部增加一个视图 并不是cell
+        }
+    }
     
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        var scrollViewContentOffsetY = scrollView.contentOffset.y
+        if pullDownInProgress && scrollView.contentOffset.y <= 0.0 {
+            placeHolderCell.frame = CGRectMake(0, -sTableView.rowHeight, sTableView.frame.size.width, sTableView.rowHeight)
+            let text  = -scrollViewContentOffsetY > sTableView.rowHeight ? "Release to add item" : "Pull to add item"
+            placeHolderCell.label.text = text
+            placeHolderCell.alpha = min(1.0 , -scrollViewContentOffsetY / sTableView.rowHeight)
+        }else{
+            pullDownInProgress = false
+        }
+    }
+    func toDoItemAdded(){
+        arrayData.insert("New Item", atIndex: 0)
+//        sTableView.reloadData()
+        sTableView.beginUpdates()
+        let path = NSIndexPath(forRow: 0, inSection: 0)
+        sTableView.insertRowsAtIndexPaths([path], withRowAnimation: .Right)
+        sTableView.endUpdates()
+    }
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if pullDownInProgress && -scrollView.contentOffset.y > sTableView.rowHeight {
+            toDoItemAdded()
+        }
+        pullDownInProgress = false
+        placeHolderCell.removeFromSuperview()
+    }
+//MARK: TableView DataSource Delegate Method
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -384,9 +426,12 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         if cell == nil {
             cell = TableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: string)
         }
-        cell.textLabel.text = "Title"
+//        cell.textLabel.text = "Title"
+        cell.label.text = arrayData[indexPath.row]
         cell.selectionStyle = .None
-        cell.detailTextLabel?.text = arrayData[indexPath.row]
+//        cell.detailTextLabel?.text = arrayData[indexPath.row]
+        cell.delegate = self
+        cell.indexTag = indexPath.row
         return cell
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -408,8 +453,39 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         cell.backgroundColor = colorForIndex(indexPath.row)
     }
     
- //MARK: -TableView delegate 
-
+ //MARK: -TableViewCell Delegate Method
+    func toDoItemDeleted(index: Int) {
+        arrayData.removeAtIndex(index)
+        
+        //增加cell 动画
+        let visibleCells = sTableView.visibleCells()
+        let lastView = visibleCells[visibleCells.count - 1] as TableViewCell
+        var delay = 0.0
+        var startAnimating = false
+        for i in 0..<visibleCells.count {
+            let cell = visibleCells[i] as TableViewCell
+            if startAnimating {
+                UIView.animateWithDuration(0.3, delay: delay, options: .CurveEaseInOut, animations: { () -> Void in
+                    cell.frame = CGRectOffset(cell.frame, 0.0, -cell.frame.size.height)
+                }, completion: { (_) -> Void in
+                    if (cell == lastView){
+                        self.sTableView.reloadData()  //tableview 做整体动画时使用reloadData 刷新
+                    }
+                })
+                delay += 0.03
+            }
+            if cell.indexTag == index {
+                startAnimating = true
+                cell.hidden = true
+            }
+        }
+        
+        
+        sTableView.beginUpdates()
+        let indexPathForRow = NSIndexPath(forRow: index, inSection: 0)
+        sTableView.deleteRowsAtIndexPaths([indexPathForRow], withRowAnimation: .Fade)    //cell 单体动画
+        sTableView.endUpdates()
+    }
     
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         println(" AlertViewButtonTag = \(buttonIndex)")
@@ -498,19 +574,32 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     }
 }
 
-//From :http://www.raywenderlich.com/77974/making-a-gesture-driven-to-do-list-app-like-clear-in-swift-part-1
+//MARK :http://www.raywenderlich.com/77974/making-a-gesture-driven-to-do-list-app-like-clear-in-swift-part-1
 
 protocol TableViewCellDelegate{
-    func toDoItemDeleted()
+    func toDoItemDeleted(index :Int)
 }
 class TableViewCell: UITableViewCell ,UIGestureRecognizerDelegate {
     let gradientLayer = CAGradientLayer()  // CAGradientLayer可以方便的处理颜色渐变。
     var originalCenter = CGPoint()
-    var deleteOnDragRelese = false
-    
+    var deleteOnDragRelese = false , completeOnDragRelease = false
+    var indexTag : Int = 0
     var delegate: TableViewCellDelegate?
     
+    let label: StrikeThroughText
+    let itemCompleteLayer = CALayer()
+    
+    var tickLabel:UILabel! ,crossLabel:UILabel!
+    
+    let kUICuesMargin:CGFloat = 10.0 , kUICuesWidth:CGFloat = 50.0
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        // 变量的初始化 在父类方法初始化之前完成
+        label = StrikeThroughText(frame: CGRect.nullRect)
+        label.textColor = UIColor.whiteColor()
+        label.font = UIFont.boldSystemFontOfSize(16)
+        label.backgroundColor = UIColor.clearColor()
+        
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         gradientLayer.frame = bounds
         let color1 = UIColor(white: 1.0, alpha: 0.2).CGColor as CGColorRef
@@ -525,6 +614,26 @@ class TableViewCell: UITableViewCell ,UIGestureRecognizerDelegate {
         recognizer.delegate = self
         addGestureRecognizer(recognizer)
         
+        addSubview(label)
+        selectionStyle = .None
+        
+        itemCompleteLayer = CALayer(layer: layer)
+        itemCompleteLayer.backgroundColor = UIColor(red: 0.0, green: 0.6, blue: 0.0, alpha: 1.0).CGColor
+        itemCompleteLayer.hidden = true
+        layer.insertSublayer(itemCompleteLayer, atIndex: 0)
+        
+//MARK: 符号代码 http://en.wikibooks.org/wiki/Unicode/List_of_useful_symbols
+
+        tickLabel = creatCuesLabel()
+        tickLabel.text = "\u{2713}"
+        tickLabel.textAlignment = .Right
+        addSubview(tickLabel)
+        
+        crossLabel = creatCuesLabel()
+        crossLabel.text = "\u{2717}"
+        crossLabel.textAlignment = .Left
+        addSubview(crossLabel)
+        
     }
     required init(coder aDecoder: NSCoder) {
         fatalError("")
@@ -536,25 +645,49 @@ class TableViewCell: UITableViewCell ,UIGestureRecognizerDelegate {
         if recognizer.state == UIGestureRecognizerState.Changed {
             let transiation = recognizer.translationInView(self)
             center = CGPointMake(originalCenter.x + transiation.x, originalCenter.y)
-            deleteOnDragRelese = frame.origin.x < -(CGFloat(frame.size.width) / 2)
+            deleteOnDragRelese = frame.origin.x < -(CGFloat(frame.size.width) / 2)      //左滑是删 右滑是标记
+            completeOnDragRelease = frame.origin.x > frame.size.width / 2
+            
+            let cueAlpha = fabs(frame.origin.x) / (frame.size.width / 2)
+            tickLabel.alpha  = cueAlpha
+            crossLabel.alpha = cueAlpha
+            tickLabel.textColor = completeOnDragRelease ? UIColor.greenColor() : UIColor.whiteColor()
+            crossLabel.textColor = deleteOnDragRelese ? UIColor.redColor() : UIColor.whiteColor()
         }
         if recognizer.state == UIGestureRecognizerState.Ended {
             let originalFrame = CGRect(x: 0, y: frame.origin.y, width: bounds.width, height: bounds.height)
-            if !deleteOnDragRelese {
+//            if !deleteOnDragRelese {
+//                UIView.animateWithDuration(0.2, animations: { () -> Void in
+//                    self.frame = originalFrame
+//                })
+//            }
+            if deleteOnDragRelese {
+                if delegate != nil {
+                    delegate!.toDoItemDeleted(indexTag)
+                }
+            }else if completeOnDragRelease {
+                label.strikeThrough = true
+                itemCompleteLayer.hidden = false
+                UIView.animateWithDuration(0.2, animations: { () -> Void in
+                    self.frame = originalFrame
+                })
+            }else{
                 UIView.animateWithDuration(0.2, animations: { () -> Void in
                     self.frame = originalFrame
                 })
             }
-            if deleteOnDragRelese {
-                if delegate != nil {
-                    delegate!.toDoItemDeleted()
-                }
-            }
         }
     }
+    let kLabelLeftMargin:CGFloat = 15.0
     override func layoutSubviews() {
        super.layoutSubviews()
         gradientLayer.frame = bounds
+        
+        itemCompleteLayer.frame = bounds
+        label.frame = CGRect(x: kLabelLeftMargin, y: 0, width: bounds.size.width - kLabelLeftMargin, height: bounds.size.height)
+        
+        tickLabel.frame = CGRect(x: -kUICuesWidth - kUICuesMargin, y: 0, width: kUICuesWidth, height: bounds.size.height)
+        crossLabel.frame = CGRect(x: bounds.size.width + kUICuesMargin, y: 0, width: kUICuesWidth, height: bounds.size.height)
     }
     // 判断手势是左右滑动 还是 上下滑动
     override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -568,4 +701,59 @@ class TableViewCell: UITableViewCell ,UIGestureRecognizerDelegate {
         return false
     }
     
+    func creatCuesLabel() ->UILabel {
+        let label = UILabel(frame: CGRect.nullRect)
+        label.textColor = UIColor.whiteColor()
+        label.font = UIFont.boldSystemFontOfSize(32.0)
+        label.backgroundColor = UIColor.clearColor()
+        return label
+    }
 }
+
+// 带中划线的Label
+class StrikeThroughText: UILabel {
+    let strikeThroughLayer: CALayer
+    var strikeThrough: Bool {
+        didSet{
+            strikeThroughLayer.hidden = !strikeThrough
+            if strikeThrough {
+                resizeStrikeThrough()
+            }
+        }
+    }
+    required init(coder aDecoder: NSCoder) {
+        fatalError("")
+    }
+    
+    override init(frame: CGRect) {
+        strikeThroughLayer = CALayer()
+        strikeThroughLayer.backgroundColor = UIColor.whiteColor().CGColor
+        strikeThroughLayer.hidden = true
+        strikeThrough = false
+        
+        super.init(frame: frame)
+        layer.addSublayer(strikeThroughLayer)
+    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+         resizeStrikeThrough()
+    }
+    
+    let kStrikeOutThickness: CGFloat = 2.0
+    func resizeStrikeThrough(){
+        if text != nil{
+        let textSize = text!.sizeWithAttributes([NSFontAttributeName:font!])
+        strikeThroughLayer.frame = CGRect(x: 0, y: bounds.size.height/2, width: textSize.width, height: kStrikeOutThickness)
+        }else{
+            println(
+            " Label have no Text!!!! "
+            )
+        }
+    }
+}
+
+
+
+
+
+
