@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 import QuartzCore
+
+typealias funcBlock = () ->()
+typealias funcBlcok2 = (String) ->(String)
+
 class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate,NSURLConnectionDelegate,NSURLConnectionDataDelegate ,TableViewCellDelegate ,UIScrollViewDelegate{  // swift中协议的遵循 用逗号
     
     var sImageView: UIImageView = UIImageView(image: nil)
@@ -27,6 +31,8 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     let placeHolderCell = TableViewCell(style: .Default, reuseIdentifier: "cell")
     var pullDownInProgress = false
     
+    var block1 : funcBlock!
+    var block2 : funcBlcok2!
     
     func createAnimatorStuff(){
         animator = UIDynamicAnimator(referenceView: self.view)
@@ -75,8 +81,8 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     }
     override func viewDidLoad() {
         
-        
-        
+        block1?()
+        block2?("Block Test")
         self.title = "第二个界面"
         let addBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "editData")
         
@@ -376,7 +382,8 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
             
         })
     }
-    
+
+//FROM : http://www.raywenderlich.com/77975/making-a-gesture-driven-to-do-list-app-like-clear-in-swift-part-2
 //MARK: ScrollViewDelegateMethod  下拉增加Item
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
        pullDownInProgress = scrollView.contentOffset.y <= 0.0
@@ -749,7 +756,9 @@ class StrikeThroughText: UILabel {
             " Label have no Text!!!! "
             )
         }
+
     }
+    
 }
 
 

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Foundation
 class ViewController: UIViewController {
     
     @IBOutlet weak var testTextField: UITextField!
@@ -51,7 +51,8 @@ class ViewController: UIViewController {
     
     func btnOnTouched(btn: UIButton) {
 //        btn.setImage(UIImage(named: "icon2"), forState: UIControlState.Normal)
-        let secView = SecViewController(nibName: nil, bundle: nil)
+        var secView = SecViewController(nibName: nil, bundle: nil)
+    
 //        self .presentViewController(secView, animated: true) { () -> Void in
 //            println(" presentView now .....")
 //        }
@@ -99,6 +100,10 @@ class ViewController: UIViewController {
         aStudent = Student()
         aStudent.age = 15           //**** 等号2边都要空格
         aStudent.name = "Chris"
+        aStudent.block = {(str: String) -> String in
+            println(" Blcok Test Success ")
+            return "FFF"
+        }
         aStudent.studentMethod()
         
         var food = Food()
@@ -724,6 +729,7 @@ class ViewController: UIViewController {
     func clickedImage(){       //makePopAnimation
         let popView = SecViewController(nibName: nil, bundle: nil)
         popView.transitioningDelegate = self
+
 //       self.navigationController!.pushViewController(popView, animated: true)
         presentViewController(popView, animated: true, completion: nil)
     }

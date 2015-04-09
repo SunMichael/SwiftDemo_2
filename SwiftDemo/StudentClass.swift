@@ -7,11 +7,12 @@
 //
 
 import Foundation
+
 public class Student: NSObject {
     var age: Int!
     var name: NSString!
     let level: Int!
-    
+    var block: funcBlcok2?        //block 代理使用
     var aString: NSString = "asss"
     
     override init() {
@@ -19,6 +20,8 @@ public class Student: NSObject {
     }
     
     func studentMethod(){
+        block!("GGG")
+        
         println(" print method")
     }
     
