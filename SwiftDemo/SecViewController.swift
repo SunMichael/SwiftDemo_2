@@ -173,9 +173,24 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         })
          
         
-        
+        testForMemory()
         
     }
+    var testBtn: UIButton!
+    func testForMemory(){          //对全局变量进行反复初始化会造成不断重新分配内存，导致内存增加
+        for var i = 0 ; i < 1000 ; i++ {
+            if (self.testBtn != nil) {
+                self.testBtn .removeFromSuperview()
+                self.testBtn  = nil
+                
+            }
+            self.testBtn = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+            self.testBtn.tag = i
+            testBtn.setTitle("\(i)", forState: UIControlState.Normal)
+            self.view.addSubview(testBtn)
+        }
+    }
+    
     
     func addRefreshControl(){
         var refresh = UIRefreshControl()

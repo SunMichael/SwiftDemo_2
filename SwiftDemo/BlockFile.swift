@@ -268,5 +268,55 @@ class RequestManager: RequestHandler {
 }
 
 
+extension String {
+    struct _Dumy {
+        var idxVal: Int
+        var _padding: Int
+        var _padding2: Int
+        var _padding3: Int
+    }
+    func fitlerCharater() ->String {
+        var numberStr : String = ""
+        for character in self {
+            let s: String = String(character)
+            if let hs = s.toInt() {
+                numberStr.append(character)
+            }
+            
+            var garage = Garage()
+            garage[0] = "A"
+            garage[1] = "B"
+            println(" test  == \(garage[1]) ")
+        }
+        return numberStr
+    }
+
+    
+}
+
+class Garage {
+    var products: [String] = Array()
+    
+    //MARK: 使用下标访问
+    subscript(index: Int) -> String{
+        get {
+            return products[index]
+        }
+        set {      //给products中的元素赋值
+            if index < products.count {
+                products[index] = newValue
+            }else
+            {
+              products.append(newValue)
+            }
+        }
+    }
+}
+
+
+
+
+
+
 
 
