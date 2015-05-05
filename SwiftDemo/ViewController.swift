@@ -375,9 +375,9 @@ class ViewController: UIViewController {
         
         
         // 对应闭包的三种简写
-//        GetList([pre:1 ,2,3,4], {s in return s > 2})
-//        GetList([1,2,pre,:3 ,4], {s in s>2})
-//        GetList([1,2,3pre,,: ,4], {$0>2})
+        GetList([1 ,2,3,4], pre: {s in return s > 2})
+        GetList([1,2,3 ,4], pre: {s in s>2})
+        GetList([1,2,3 ,4], pre: {$0>2})
         
         
         return (value ,value1)
