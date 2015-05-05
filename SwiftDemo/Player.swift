@@ -260,7 +260,7 @@ class Tiger: Cat {
 }
 //MARK: 协议
 protocol MyProtocol {          // 在enum和struct中还是使用static  class和protocol中使用class
-    class func foo() ->String
+    static func foo() ->String
 }
 struct MyStruct: MyProtocol {
     static func foo() -> String {

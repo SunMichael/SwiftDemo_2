@@ -41,7 +41,7 @@ class KeyboardViewController: UIInputViewController {
         self.view .addSubview(button)
     }
     func creatButtonWithTitle(title: String) ->UIButton{
-        let button = UIButton.buttonWithType(.System) as UIButton
+        let button = UIButton.buttonWithType(.System) as! UIButton
         button.frame = CGRectMake(0, 0, 30, 30)
         button.setTitle(title, forState: .Normal)
         button.sizeToFit()
@@ -65,7 +65,7 @@ class KeyboardViewController: UIInputViewController {
         // The app has just changed the document's contents, the document context has been updated.
     
         var textColor: UIColor
-        var proxy = self.textDocumentProxy as UITextDocumentProxy
+        var proxy = self.textDocumentProxy as! UITextDocumentProxy
         if proxy.keyboardAppearance == UIKeyboardAppearance.Dark {
             textColor = UIColor.whiteColor()
         } else {

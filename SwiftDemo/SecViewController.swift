@@ -184,7 +184,7 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                 self.testBtn  = nil
                 
             }
-            self.testBtn = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
+            self.testBtn = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
             self.testBtn.tag = i
             testBtn.setTitle("\(i)", forState: UIControlState.Normal)
             self.view.addSubview(testBtn)
@@ -481,11 +481,11 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         
         //增加cell 动画
         let visibleCells = sTableView.visibleCells()
-        let lastView = visibleCells[visibleCells.count - 1] as TableViewCell
+        let lastView = visibleCells[visibleCells.count - 1] as! TableViewCell
         var delay = 0.0
         var startAnimating = false
         for i in 0..<visibleCells.count {
-            let cell = visibleCells[i] as TableViewCell
+            let cell = visibleCells[i] as! TableViewCell
             if startAnimating {
                 UIView.animateWithDuration(0.3, delay: delay, options: .CurveEaseInOut, animations: { () -> Void in
                     cell.frame = CGRectOffset(cell.frame, 0.0, -cell.frame.size.height)
@@ -609,7 +609,7 @@ class TableViewCell: UITableViewCell ,UIGestureRecognizerDelegate {
     var delegate: TableViewCellDelegate?
     
     let label: StrikeThroughText
-    let itemCompleteLayer = CALayer()
+    var itemCompleteLayer :CALayer!
     
     var tickLabel:UILabel! ,crossLabel:UILabel!
     

@@ -47,7 +47,7 @@ prefix func ~/(pattern: String) -> NSRegularExpression{
 }
 
 func ~=(pattern: NSRegularExpression, input: String) ->Bool{      //重载 模式匹配 ~= 操作符
-    return pattern.numberOfMatchesInString(input, options: nil, range: NSRange(location: 0, length: input.utf16Count)) > 0
+    return pattern.numberOfMatchesInString(input, options: nil, range: NSRange(location: 0, length: input.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))) > 0
 }
 
 

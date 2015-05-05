@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     
     var aStudent :Student!   //声明其他类的变量 不用像oc那样引入h文件 直接写？
     
-    let sNum:Int!     // Int8 ,Int32, Int 数据类型   Int默认根据编译器—> Int32 或者 Int64
+    let sNum:Int = 0     // Int8 ,Int32, Int 数据类型   Int默认根据编译器—> Int32 或者 Int64
     
     var label: UILabel!
     func changeLabelText(sender :NSNotification) {
@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         
         NSNotificationCenter .defaultCenter() .addObserver(self, selector: "changeLabelText:", name: "Change", object: nil)
         
-        var button: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as UIButton       //枚举值和 结构体数据 的调用用点？
+        var button: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton       //枚举值和 结构体数据 的调用用点？
         button.frame = CGRectMake(100, 40, 100, 100)
         button.setImage(UIImage(named: "icon2"), forState: UIControlState.Normal)
         button.addTarget(self, action: "btnOnTouched:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -237,7 +237,7 @@ class ViewController: UIViewController {
             return String(num) + str
         }
         fun1(222,"KKKK")
-        someTrailingBlick("Trailing Block", fun1)
+        someTrailingBlick("Trailing Block", closure: fun1)
         someTrailingBlick2("Trailing Block2", fun1)
         
         
@@ -375,9 +375,9 @@ class ViewController: UIViewController {
         
         
         // 对应闭包的三种简写
-        GetList([1,2,3,4], {s in return s > 2})
-        GetList([1,2,3,4], {s in s>2})
-        GetList([1,2,3,4], {$0>2})
+//        GetList([pre:1 ,2,3,4], {s in return s > 2})
+//        GetList([1,2,pre,:3 ,4], {s in s>2})
+//        GetList([1,2,3pre,,: ,4], {$0>2})
         
         
         return (value ,value1)

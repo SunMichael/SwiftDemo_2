@@ -14,9 +14,9 @@ class FlowCardController: UICollectionViewController ,UICollectionViewDataSource
     
     override func viewDidLoad() {
          //[someClass class]  == someClass.self
-        self.collectionView.registerClass(CCell.self, forCellWithReuseIdentifier: "MYcell")
+        self.collectionView!.registerClass(CCell.self, forCellWithReuseIdentifier: "MYcell")
         var tapGesture = UITapGestureRecognizer(target: self, action: "addOrDeleteItem:")
-        self.collectionView.addGestureRecognizer(tapGesture)
+        self.collectionView!.addGestureRecognizer(tapGesture)
         
         
         let contact = ("http://onevcat.com","onev@onevcat.com")
@@ -40,11 +40,11 @@ class FlowCardController: UICollectionViewController ,UICollectionViewDataSource
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell: CCell = collectionView.dequeueReusableCellWithReuseIdentifier("MYcell", forIndexPath: indexPath) as CCell
+        var cell: CCell = collectionView.dequeueReusableCellWithReuseIdentifier("MYcell", forIndexPath: indexPath) as! CCell
         cell.label.text = String( indexPath.row)
         return cell
     }
-    override init(collectionViewLayout layout: UICollectionViewLayout!) {
+    override init(collectionViewLayout layout: UICollectionViewLayout) {
         super.init(collectionViewLayout: layout)
     }
 
@@ -57,11 +57,11 @@ class FlowCardController: UICollectionViewController ,UICollectionViewDataSource
     func addOrDeleteItem(sender: UITapGestureRecognizer){
         if (sender.state == UIGestureRecognizerState.Ended ){
             let point = sender.locationInView(self.collectionView)
-            let index = self.collectionView.indexPathForItemAtPoint(point)
+            let index = self.collectionView!.indexPathForItemAtPoint(point)
             if (index != nil)  {
                 self.cellCount = self.cellCount - 1
 
-                self.collectionView.performBatchUpdates({ () -> Void in
+                self.collectionView!.performBatchUpdates({ () -> Void in
                     println("collectionView Updates")
 //                    self.collectionView.deleteItemsAtIndexPaths([index])
                 }, completion: { (Bool) -> Void in

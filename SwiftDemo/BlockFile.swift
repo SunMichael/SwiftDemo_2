@@ -174,7 +174,7 @@ let str = (instance as pB).bar()
 
 //MARK: class关键字在协议中的修饰时，在struct和enum中使用 static 而在class中使用 class
 protocol TestProtocol{
-    class func foo() ->String
+    static func foo() ->String
 }
 
 struct TestStruct: TestProtocol{

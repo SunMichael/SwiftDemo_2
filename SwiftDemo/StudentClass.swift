@@ -170,8 +170,9 @@ struct RegexHelper {
         regex = NSRegularExpression(pattern: pattern, options: NSRegularExpressionOptions.CaseInsensitive, error: &error)
     }
     func match(input: String) ->Bool {
-        let length = countElements(input)      //swift 获取String的长度方法 
-        if let matches = regex?.matchesInString(input, options: nil, range: NSMakeRange(0, input.utf16Count)) {
+        let length = count(input)      //swift 获取String的长度方法 
+        if let matches = regex?.matchesInString(input, options: nil, range: NSMakeRange(0, input.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))) {
+            
             return matches.count > 0
         }else{
             return false
