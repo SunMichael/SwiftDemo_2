@@ -45,6 +45,7 @@
 		39B683A91A806E2000CC330B /* BlockFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B683A81A806E2000CC330B /* BlockFile.swift */; };
 		39C737CD1AA1BA280013D5B8 /* SecViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C737CC1AA1BA280013D5B8 /* SecViewController.swift */; };
 		4E4BF221E71169FA3087DDDD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5632A7F6FDB9C8569C005B30 /* libPods.a */; };
+		FAD856C81AFAF6C200C8F312 /* UnSafePointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD856C71AFAF6C200C8F312 /* UnSafePointer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +142,7 @@
 		5632A7F6FDB9C8569C005B30 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		71D7ED694FD1B934038DE90A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F07404CEB9D81F1EEB3017F6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		FAD856C71AFAF6C200C8F312 /* UnSafePointer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnSafePointer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +215,7 @@
 				3950A0421A76483400031A11 /* Player.swift */,
 				39B683A81A806E2000CC330B /* BlockFile.swift */,
 				392E58ED1AA8022B007917A1 /* Utils.swift */,
+				FAD856C71AFAF6C200C8F312 /* UnSafePointer.swift */,
 				396755F41A8309DE004612C1 /* Container.swift */,
 				39AD85BF1ACB93E300CEF90F /* CustomImageView.swift */,
 				39AD85C11ACB994F00CEF90F /* CircularLoaderView.swift */,
@@ -492,6 +495,7 @@
 				39AD85B71ACB93C600CEF90F /* SDWebImageManager.m in Sources */,
 				39AD85BE1ACB93C600CEF90F /* UIView+WebCacheOperation.m in Sources */,
 				396755F51A8309DE004612C1 /* Container.swift in Sources */,
+				FAD856C81AFAF6C200C8F312 /* UnSafePointer.swift in Sources */,
 				39AD85C21ACB994F00CEF90F /* CircularLoaderView.swift in Sources */,
 				392E58EE1AA8022B007917A1 /* Utils.swift in Sources */,
 				39AD85BC1ACB93C600CEF90F /* UIImageView+HighlightedWebCache.m in Sources */,
@@ -656,12 +660,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEFINES_MODULE = NO;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = SwiftDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-D FREE_VERSION";
 				PRODUCT_NAME = SwiftDemo;
+				PROVISIONING_PROFILE = "593c8d55-6dc4-4ec3-8789-bc06506e5de6";
 				SWIFT_OBJC_BRIDGING_HEADER = "SwiftDemo/SwiftDemo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -679,6 +685,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-D FREE_VERSION";
 				PRODUCT_NAME = SwiftDemo;
+				PROVISIONING_PROFILE = "593c8d55-6dc4-4ec3-8789-bc06506e5de6";
 				SWIFT_OBJC_BRIDGING_HEADER = "SwiftDemo/SwiftDemo-Bridging-Header.h";
 			};
 			name = Release;

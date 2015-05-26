@@ -46,9 +46,10 @@ class Counter  {
     func reset() {
         count = 0
     }
-    
+
     class func ShareCounter() {
          println("This is a ClassMethod ")
+        
     }
 }
 
