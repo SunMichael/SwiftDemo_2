@@ -732,8 +732,39 @@ class ViewController: UIViewController {
 
 //       self.navigationController!.pushViewController(popView, animated: true)
         presentViewController(popView, animated: true, completion: nil)
+        
+        var numb1 = 10
+        var numb2 = 20
+        changeValues(&numb1, b: &numb2);
+        println(" numb1 now = \(numb1) ,numb2 now = \(numb2)")
+        
+        join(string: "hello", toString: "world", withJoiner: ",")
+        containsCharacter(string: "hello", characterToFind: "h")
+
     }
     
+    //intout 输入输出参数  参数在函数体内被改变  值会被替换
+    func changeValues(inout a : Int ,inout b : Int){
+        let temporary = a
+        a = b
+        b = temporary
+    }
+    
+    // 希望函数使用者在调用函数时提供参数名字，就需要使用函数外部参数名 外部参数名写在局部参数名之前，用空格分隔。
+    // 以下 string toString withJoiner 是外部参数名  以一种清晰的方式调用函数
+    // withJoiner joiner: String = "-"  是给joiner赋予默认值
+    func join(string s1: String, toString s2: String , withJoiner joiner: String = "-") -> String{
+        return s1 + joiner + s2
+    }
+    //声明外部参数简单的方式 是在参数名前加#
+    func containsCharacter(#string : String , characterToFind : Character) -> Bool{
+        for character1 in string {
+            if character1 == characterToFind {
+                return true
+            }
+        }
+        return false
+    }
     
 }
 

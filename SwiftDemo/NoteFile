@@ -151,4 +151,4 @@ self.layer.allowsEdgeAntialiasing = YES;
 N27: viewDebuging中有showViewFrame 和ShowAlignmentRects,可以在xcode上显示视图的frame大小
 
 
-
+N28: 如果你想要一个函数可以修改参数的值，并且想要在这些修改在函数调用结束后仍然存在，那么就应该把这个参数定义为输入输出参数（In-Out Parameters）。

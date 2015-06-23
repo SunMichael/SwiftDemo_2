@@ -249,6 +249,16 @@ class Cat {
         }
         return addTheSecondNumber
     }
+    
+    func stringAppend(s: String) ->(String -> String -> String){
+        func appendString(a: String) -> (String -> String){
+            func appendString2(b: String) -> String{
+                return s + a + b
+            }
+            return appendString2
+        }
+        return appendString
+    }
 }
 class Tiger: Cat {
     let power: Int

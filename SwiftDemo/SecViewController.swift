@@ -107,7 +107,13 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         let num = cat.addTwoNumbers2(5)
         var num2 = num(10)
         num2 = num(15)
-        println( "柯里化函数 num =\(num) num2 =\(num2) ")
+        
+        let func1 = cat.stringAppend("H")
+        let func2 = func1("E")
+        var func3 = func2("R")
+
+        
+        println( "柯里化函数 num =\(num) num2 =\(num2) fun ==\(func3) ")
         
         let width = UIScreen.mainScreen().bounds.width
         
