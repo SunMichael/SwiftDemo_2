@@ -20,11 +20,18 @@ public class Student: NSObject {
     }
     
     func studentMethod(){
-        block!("GGG")
+       let blockString = block!("GGG")
         
-        println(" print method")
+        let completionBlock: (NSString ,Int) -> Void = {(data ,error) in
+            println(" complettionBlock")
+        }
+        completionBlock("asd", 10)
+        println(" print method \(blockString)")
     }
     
+    func studentMethod2() -> String?{
+        return "BADF"
+    }
 }
 
 public func StudentFuncOne(stringName: NSString) ->NSString{
@@ -102,6 +109,13 @@ class SomeClass {
         (arg1:String ,arg2:String) ->String in
         return arg1 + arg2
     }("Job","Deer")
+    
+    
+    var block1 = {(arg1: String, arg2: String) ->() in
+        let str = arg1 + arg2
+        println(" it is two string + = \(str)")
+    }
+    
     
 }
 

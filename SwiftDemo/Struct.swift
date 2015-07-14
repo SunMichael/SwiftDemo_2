@@ -127,3 +127,50 @@ enum OnOffSwitch: Togglable {
     }
 }
 
+
+
+/// @brief 属性监听
+class MyTestClass {
+    let oneYearInSecond: NSTimeInterval = 365 * 24 * 60 * 60
+    var date: NSDate{
+        
+        // willSet 和 didSet 分别用 newValue 和 oldValue
+        
+        willSet {
+            println("即将将日期从 \(date) 改成 \(newValue)")
+        }
+        didSet {
+            if date.timeIntervalSinceNow > oneYearInSecond {
+                println(" 设定的时间太晚了 ")
+                date = NSDate().dateByAddingTimeInterval(oneYearInSecond)
+            }
+            println(" 已经将日期从 \(oldValue) 改成 \(date)")
+        }
+    }
+    init() {
+        date = NSDate()
+    }
+}
+/// @brief 在子类的重载属性中我们是可以对父类的属性任意地添加属性观察的，而不用在意父类中到底是存储属性还是计算属性
+class SimClass {
+    var number : Int {
+        get {
+            println(" get ")
+            return 1
+        }
+        set {
+            println(" set ")
+        }
+    }
+}
+
+class SimClass2: SimClass {
+    override var number: Int {
+        willSet {
+            println(" willSet ")
+        }
+        didSet {
+            println(" didSet ")
+        }
+    }
+}

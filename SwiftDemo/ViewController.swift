@@ -47,6 +47,11 @@ class ViewController: UIViewController {
         
         self.title = "第一个界面"
         
+        let 方法 = "sadas"
+        self.方法()
+    }
+    func 方法(){
+        
     }
     
     func btnOnTouched(btn: UIButton) {
@@ -100,6 +105,8 @@ class ViewController: UIViewController {
         aStudent = Student()
         aStudent.age = 15           //**** 等号2边都要空格
         aStudent.name = "Chris"
+        // block 是一个参数为string返回string的block类型
+        // typealias (string) -> (string)
         aStudent.block = {(str: String) -> String in
             println(" Blcok Test Success ")
             return "FFF"
@@ -240,7 +247,14 @@ class ViewController: UIViewController {
         someTrailingBlick("Trailing Block", closure: fun1)
         someTrailingBlick2("Trailing Block2", fun1)
         
+        let fileManager = NSFileManager.defaultManager()
+        let URL = NSURL.fileURLWithPath("SwiftDemo/NoteFile")
         
+        let mainBundle = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
+        let data = NSData(contentsOfFile: mainBundle!)
+        println(" DATA : \(data!.length)")
+        
+
         
 //        setUpLayer()
 //        addSomeLayer()
