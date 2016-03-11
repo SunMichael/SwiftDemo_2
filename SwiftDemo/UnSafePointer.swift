@@ -38,8 +38,8 @@ func delay(time: NSTimeInterval ,task:() -> ()) ->Task{
 
 func cancel(task : Task?) {
     task?(cancel: true)
-    let tt = delay(2, { () -> () in
-        println("  write something")
+    _ = delay(2, task: { () -> () in
+        print("  write something")
     })
 }
 
@@ -52,7 +52,7 @@ func methodOrigin(const int *num){
 //MARK 上面是C中的写法 。对于其他的 C 中基础类型，在 Swift 中对应的类型都遵循统一的命名规则：在前面加上一个字母 C 并将原来的第一个字母大写：比如 int，bool 和 char 的对应类型分别是 CInt，CBool 和 CChar。
 
 func method(num : UnsafePointer<CInt>){
-     println(num.memory)       //使用 memory 属性来读取相应内存中存储的内容。
+     print(num.memory)       //使用 memory 属性来读取相应内存中存储的内容。
 }
 
 func testForMethod(){
@@ -91,7 +91,7 @@ class UI: CombineUI {
 
 class Currying {
     func add(a: Int ,b: Int, c: Int) -> Int{
-        println("\(a) + \(b) + \(c)")
+        print("\(a) + \(b) + \(c)")
         return a + b + c
     }
     
@@ -104,28 +104,28 @@ class Currying {
     }
     
     func addCur(a: Int)(b: Int)(c: Int) ->Int{
-        println("\(a) + \(b) + \(c)")
+        print("\(a) + \(b) + \(c)")
         return a + b + c
     }
 }
 
 func testForCurry(){
-    var curryInstance = Currying()
-    var r: Int = curryInstance.add(10)(b: 20)(c: 30)
+    let curryInstance = Currying()
+    _ = curryInstance.add(10)(b: 20)(c: 30)
     let functionB = curryInstance.add(10)
     let functionC = functionB(b: 20)
-    let sumNumber = functionC(c: 30)
+    _ = functionC(c: 30)
     
-    let test = "hello"
-    let interval = "a"..."z"
-    for c in test {
-        if interval.contains(String(c)) {
-            println("\(c) 是小写字母")
-        }
-    }
+    _ = "hello"
+    _ = "a"..."z"
+//    for c in test {
+//        if interval.contains(String(c)) {
+//            println("\(c) 是小写字母")
+//        }
+//    }
     
     for i in 1...10 {
-        println( " \(i)  ")
+        print( " \(i)  ")
     }
     
 }

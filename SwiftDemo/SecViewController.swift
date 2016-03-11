@@ -57,7 +57,7 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     */
     required init(coder aDecoder: NSCoder) {
         //        fatalError("init(coder:) has not been implemented")
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
     }
     func checkCacheData(){
         let url = NSURL(string: "http://img6.cache.netease.com/cnews/2012/6/1/20120601085505e3aba.jpg")
@@ -67,9 +67,9 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         let cache = NSURLCache.sharedURLCache()
         let response = cache.cachedResponseForRequest(request!)
         if response == nil {
-            println("no cache")
+            print("no cache")
         }else{
-            println("exsit cache ==\(response?.data.length)")
+            print("exsit cache ==\(response?.data.length)")
             cache.removeCachedResponseForRequest(request!)
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.sImageView.image = UIImage(data: response!.data)
@@ -90,7 +90,7 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         self.navigationItem.rightBarButtonItems = [addBtn ,deleteBtn ]
         
         
-        var backImage = UIImageView(image: UIImage(named: "icon"), highlightedImage: nil)
+        let backImage = UIImageView(image: UIImage(named: "icon"), highlightedImage: nil)
         backImage.frame = CGRectMake(100, 60, 100, 100)
         self.view .addSubview(backImage)
         backImage.userInteractionEnabled = true
@@ -101,19 +101,19 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         backImage .addGestureRecognizer(tapGesture)
         
         let string: NSString  = "asdsdd"
-        println("test for extension  \(NSString.stringIsEmpty(string))")
+        print("test for extension  \(NSString.stringIsEmpty(string))")
         
-        var cat = Cat()
+        let cat = Cat()
         let num = cat.addTwoNumbers2(5)
         var num2 = num(10)
         num2 = num(15)
         
         let func1 = cat.stringAppend("H")
         let func2 = func1("E")
-        var func3 = func2("R")
+        let func3 = func2("R")
 
         
-        println( "柯里化函数 num =\(num) num2 =\(num2) fun ==\(func3) ")
+        print( "柯里化函数 num =\(num) num2 =\(num2) fun ==\(func3) ")
         
         let width = UIScreen.mainScreen().bounds.width
         
@@ -143,20 +143,20 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
         arrayData  = ["水果","熟菜","主食","饮料","糕点"]
         
         //Printable 是可打印
-        let mixed: [Printable] = [1, "two" ,3]
+        let mixed: [CustomStringConvertible] = [1, "two" ,3]
         for obj in mixed {
-            println(obj.description)
+            print(obj.description)
         }
         let mixed2 = [IntOrString.IntValue(1) ,IntOrString.StringValue("two"),IntOrString.IntValue(3)]
        
         for value in mixed2 {
             switch value {
             case let .IntValue(i):
-                println(i * 2)
+                print(i * 2)
             case let .StringValue(string):
-                println(string.capitalizedString)
+                print(string.capitalizedString)
             default :
-                println(" switch default")
+                print(" switch default")
             }
         }
         let rect = UIScreen.mainScreen().bounds
@@ -190,7 +190,7 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
                 self.testBtn  = nil
                 
             }
-            self.testBtn = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+            self.testBtn = UIButton(type : .Custom)
             self.testBtn.tag = i
             testBtn.setTitle("\(i)", forState: UIControlState.Normal)
             self.view.addSubview(testBtn)
@@ -199,7 +199,7 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     
     func addRefreshControl(){
-        var refresh = UIRefreshControl()
+        let refresh = UIRefreshControl()
         refresh.addTarget(self, action: "sortArray", forControlEvents: UIControlEvents.ValueChanged)
         
     }
@@ -213,7 +213,7 @@ class SecViewController: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     func randomFrame() ->CGRect{
         var guess = CGRectMake(9, 9, 9, 9)
-        do {
+        repeat {
         let guessX = CGFloat(arc4random()) % maxX
         let guessY = CGFloat(arc4random()) % maxY
         guess = CGRectMake(guessX, guessY, boxSize, boxSize)

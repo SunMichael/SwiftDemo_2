@@ -44,10 +44,9 @@
 		39AD85C21ACB994F00CEF90F /* CircularLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39AD85C11ACB994F00CEF90F /* CircularLoaderView.swift */; };
 		39B683A91A806E2000CC330B /* BlockFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39B683A81A806E2000CC330B /* BlockFile.swift */; };
 		39C737CD1AA1BA280013D5B8 /* SecViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C737CC1AA1BA280013D5B8 /* SecViewController.swift */; };
-		4E4BF221E71169FA3087DDDD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5632A7F6FDB9C8569C005B30 /* libPods.a */; };
+		4E4BF221E71169FA3087DDDD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5632A7F6FDB9C8569C005B30 /* libPods.a */; settings = {ATTRIBUTES = (Weak, ); }; };
 		FA148A481B281F3C00E3203E /* Struct.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA148A471B281F3C00E3203E /* Struct.swift */; };
 		FAD856C81AFAF6C200C8F312 /* UnSafePointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD856C71AFAF6C200C8F312 /* UnSafePointer.swift */; };
-		FADB784C1B39841600335B2D /* AssemblyFile.s in Sources */ = {isa = PBXBuildFile; fileRef = FADB784B1B39841600335B2D /* AssemblyFile.s */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,7 +145,6 @@
 		F07404CEB9D81F1EEB3017F6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FA148A471B281F3C00E3203E /* Struct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Struct.swift; sourceTree = "<group>"; };
 		FAD856C71AFAF6C200C8F312 /* UnSafePointer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnSafePointer.swift; sourceTree = "<group>"; };
-		FADB784B1B39841600335B2D /* AssemblyFile.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = AssemblyFile.s; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,7 +228,6 @@
 				396755FA1A834213004612C1 /* CoderModel.m */,
 				396F20DD1A709F9600A6A540 /* Main.storyboard */,
 				39A28C9D1A7B7338003607B9 /* NoteFile */,
-				FADB784B1B39841600335B2D /* AssemblyFile.s */,
 				396F20E01A709F9600A6A540 /* Images.xcassets */,
 				396F20E21A709F9600A6A540 /* LaunchScreen.xib */,
 				396F20D71A709F9600A6A540 /* Supporting Files */,
@@ -392,7 +389,9 @@
 		396F20CC1A709F9600A6A540 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastSwiftMigration = 0720;
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = keyrun;
 				TargetAttributes = {
 					396F20D31A709F9600A6A540 = {
@@ -498,7 +497,6 @@
 				39AB57421ACCE71A0040D08A /* PopAnimator.swift in Sources */,
 				3950A0431A76483400031A11 /* Player.swift in Sources */,
 				39AD85B61ACB93C600CEF90F /* SDWebImageDownloaderOperation.m in Sources */,
-				FADB784C1B39841600335B2D /* AssemblyFile.s in Sources */,
 				39AD85B71ACB93C600CEF90F /* SDWebImageManager.m in Sources */,
 				39AD85BE1ACB93C600CEF90F /* UIView+WebCacheOperation.m in Sources */,
 				396755F51A8309DE004612C1 /* Container.swift in Sources */,
@@ -600,6 +598,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -674,9 +673,11 @@
 				INFOPLIST_FILE = SwiftDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-D FREE_VERSION";
+				PRODUCT_BUNDLE_IDENTIFIER = SwiftDemo;
 				PRODUCT_NAME = SwiftDemo;
-				PROVISIONING_PROFILE = "593c8d55-6dc4-4ec3-8789-bc06506e5de6";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SwiftDemo/SwiftDemo-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Player.swift";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -692,9 +693,11 @@
 				INFOPLIST_FILE = SwiftDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-D FREE_VERSION";
+				PRODUCT_BUNDLE_IDENTIFIER = SwiftDemo;
 				PRODUCT_NAME = SwiftDemo;
-				PROVISIONING_PROFILE = "593c8d55-6dc4-4ec3-8789-bc06506e5de6";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SwiftDemo/SwiftDemo-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Player.swift";
 			};
 			name = Release;
 		};
@@ -712,6 +715,7 @@
 				);
 				INFOPLIST_FILE = SwiftDemoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "-11111.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SwiftDemoTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftDemo.app/SwiftDemo";
 			};
@@ -727,6 +731,7 @@
 				);
 				INFOPLIST_FILE = SwiftDemoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "-11111.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SwiftDemoTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftDemo.app/SwiftDemo";
 			};
@@ -741,6 +746,7 @@
 				);
 				INFOPLIST_FILE = Calculator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "SwiftDemo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -751,6 +757,7 @@
 			buildSettings = {
 				INFOPLIST_FILE = Calculator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "SwiftDemo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};

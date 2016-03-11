@@ -44,7 +44,7 @@ class CircularLoaderView: UIView {
         configure()
     }
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
         configure()
     }
     
@@ -114,7 +114,7 @@ class CircularLoaderView: UIView {
         circlePathLayer.addAnimation(groupAnimation, forKey: "strokeWidth")
     }
     
-    override func animationDidStop(anim: CAAnimation!, finished flag: Bool) {
+    override func animationDidStop(anim: CAAnimatio!, finished flag: Bool) {
         superview?.layer.mask = nil
     }
 }

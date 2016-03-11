@@ -23,10 +23,10 @@ public class Student: NSObject {
        let blockString = block!("GGG")
         
         let completionBlock: (NSString ,Int) -> Void = {(data ,error) in
-            println(" complettionBlock")
+            print(" complettionBlock")
         }
         completionBlock("asd", 10)
-        println(" print method \(blockString)")
+        print(" print method \(blockString)")
     }
     
     func studentMethod2() -> String?{
@@ -47,7 +47,7 @@ class Counter  {
     func increment() {
         count++
     }
-    func incrementBy(#amount: Int ,numberOfTimes: Int){   //在参数名前加# 会将局部名称转成外部名称
+    func incrementBy(amount amount: Int ,numberOfTimes: Int){   //在参数名前加# 会将局部名称转成外部名称
         count += amount * numberOfTimes
     }
     func reset() {
@@ -55,7 +55,7 @@ class Counter  {
     }
 
     class func ShareCounter() {
-         println("This is a ClassMethod ")
+         print("This is a ClassMethod ")
         
     }
 }
@@ -100,7 +100,7 @@ class SomeClass {
             return "Seven"
         }
         set{
-            println("set ok")
+            print("set ok")
         }
     }
     
@@ -113,7 +113,7 @@ class SomeClass {
     
     var block1 = {(arg1: String, arg2: String) ->() in
         let str = arg1 + arg2
-        println(" it is two string + = \(str)")
+        print(" it is two string + = \(str)")
     }
     
     
@@ -164,11 +164,11 @@ extension Double {
 
 
 func sayHello( str1: String = "Hello",str2: String,str3: String){   //swift支持函数参数有默认值
-    println(str1 + str2 + str3)
+    print(str1 + str2 + str3)
 }
 
 func sayHello2(str1: String,str2: String,str3: String = "World"){  //默认参数都是需要外部标签的，如果没有指定外部标签，那么 Swift 会默认自动加上同名的标签
-    println(str1 + str2 + str3)
+    print(str1 + str2 + str3)
 }
 
 func testForDefaultValue(){
@@ -178,24 +178,24 @@ func testForDefaultValue(){
 }
 
 
-struct RegexHelper {
-    let regex: NSRegularExpression?
-    init(pattern: String) {
-        var error: NSError?
-        regex = NSRegularExpression(pattern: pattern, options: NSRegularExpressionOptions.CaseInsensitive, error: &error)
-    }
-    func match(input: String) ->Bool {
-        let length = count(input)      //swift 获取String的长度方法 
-        if let matches = regex?.matchesInString(input, options: nil, range: NSMakeRange(0, input.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))) {
-            
-            return matches.count > 0
-        }else{
-            return false
-        }
-        
-    }
-}
-
+//struct RegexHelper {
+//    let regex: NSRegularExpression?
+//    init(pattern: String) {
+//        var error: NSError?
+//        regex = NSRegularExpression(pattern: pattern, options: NSRegularExpressionOptions.CaseInsensitive, error: &error)
+//    }
+//    func match(input: String) ->Bool {
+//        let length = count(input)      //swift 获取String的长度方法 
+//        if let matches = regex?.matchesInString(input, options: nil, range: NSMakeRange(0, input.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))) {
+//            
+//            return matches.count > 0
+//        }else{
+//            return false
+//        }
+//        
+//    }
+//}
+//
 
 
 

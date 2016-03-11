@@ -103,7 +103,7 @@ struct IntStack : Container{           //将此例中的int 换成T 就是泛型
 }
 
 func findStringIndex<T :Equatable>(array: [T] ,valueToFind: T) -> Int?{  //T 要遵循Equatable协议 此协议是实现了 == 和 != 比较的类型
-    for (index ,value) in enumerate(array){
+    for (index ,value) in array.enumerate(){
         if value == valueToFind {
             return index
         }
@@ -144,7 +144,7 @@ func allItemsMatch <C1: Container ,C2: Container where C1.ItemType == C2.ItemTyp
     }
 }
 
-@objc class counter{
+class counter{
     var count = 0
     var dataSource: CounterDataSource?
     func increment(){
@@ -158,7 +158,7 @@ func allItemsMatch <C1: Container ,C2: Container where C1.ItemType == C2.ItemTyp
 }
 
 class TowardsZeroSource: CounterDataSource {
-    func incrementForCount(count: Int) -> Int {
+    @objc func incrementForCount(count: Int) -> Int {
         if count == 0 {
             return 0
         }else if count < 0 {
@@ -186,7 +186,7 @@ struct PersonP: Named ,Aged{
     var age: Int
 }
 func wishHappyBirthday(celebrator: protocol <Named ,Aged>){    //参数是一个 遵循named 和aged 约束的类型
-    println("Happy birthday\(celebrator.name)")
+    print("Happy birthday\(celebrator.name)")
 }
 
 
@@ -328,7 +328,7 @@ extension NSString {
     }
 }
 
-@objc(MyNewClass)       //加objc(CLASSNAME) 由于类名是提供给oc使用所以一定是英文
+@objc(MyNewClass)      //加objc(CLASSNAME) 由于类名是提供给oc使用所以一定是英文
 class  MyNewClass {
     func method(number: Int) ->Int{
         return number + 1

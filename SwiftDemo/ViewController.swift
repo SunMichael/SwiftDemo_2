@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     
     var label: UILabel!
     func changeLabelText(sender :NSNotification) {
-        println("get notification ---\(sender)")
+        print("get notification ---\(sender)")
         label.text = "Make Change"
     }
     
@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         
         NSNotificationCenter .defaultCenter() .addObserver(self, selector: "changeLabelText:", name: "Change", object: nil)
         
-        var button: UIButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton       //枚举值和 结构体数据 的调用用点？
+        let button: UIButton = UIButton(type: .Custom)      //枚举值和 结构体数据 的调用用点？
         button.frame = CGRectMake(100, 40, 100, 100)
         button.setImage(UIImage(named: "icon2"), forState: UIControlState.Normal)
         button.addTarget(self, action: "btnOnTouched:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -47,8 +47,7 @@ class ViewController: UIViewController {
         
         self.title = "第一个界面"
         
-        let 方法 = "sadas"
-        self.方法()
+        
     }
     func 方法(){
         
@@ -56,7 +55,7 @@ class ViewController: UIViewController {
     
     func btnOnTouched(btn: UIButton) {
 //        btn.setImage(UIImage(named: "icon2"), forState: UIControlState.Normal)
-        var secView = SecViewController(nibName: nil, bundle: nil)
+        _ = SecViewController(nibName: nil, bundle: nil)
     
 //        self .presentViewController(secView, animated: true) { () -> Void in
 //            println(" presentView now .....")
@@ -77,7 +76,7 @@ class ViewController: UIViewController {
     required init(coder aDecoder: NSCoder) {
 //        fatalError("init(coder:) has not been implemented")
 //        super.init(coder: aDecoder)
-         super.init(coder: aDecoder)
+         super.init(coder: aDecoder)!
     }
     
     override func viewDidLoad() {
@@ -87,19 +86,17 @@ class ViewController: UIViewController {
         
         
         let sharedInstance = MyManager4.sharedManager
-        println(" 单例SharedInstance \(sharedInstance)")
+        print(" 单例SharedInstance \(sharedInstance)")
         
         let sharedInstance2 = MyManager4.sharedManager
-        println(" 2单例SharedInstance \(sharedInstance2)")
+        print(" 2单例SharedInstance \(sharedInstance2)")
         
         
         let aNum = 10         //*** 常量只能被赋值一次
-        var varOne: Int?        //加上？ varOne可以为nil
-        var varTwo: Optional<Int>
+
         
         // 数组的声明 2种等价
-        let someArray: [String] = ["AA" ,"NN"]
-        let someArray2: Array<String> = ["MM" ,"UU"]
+        _ = ["AA" ,"NN"]
         
         
         aStudent = Student()
@@ -108,7 +105,7 @@ class ViewController: UIViewController {
         // block 是一个参数为string返回string的block类型
         // typealias (string) -> (string)
         aStudent.block = {(str: String) -> String in
-            println(" Blcok Test Success ")
+            print(" Blcok Test Success ")
             return "FFF"
         }
         aStudent.studentMethod()
@@ -116,89 +113,88 @@ class ViewController: UIViewController {
         var food = Food()
         food = Food(name:"Apple")
         
-        var quantityFood = RecipeIngredient(name: "Orange",quantity: 1)
+        _ = RecipeIngredient(name: "Orange",quantity: 1)
         //        quantityFood.name
         
         print(aStudent)          //print 和 println的区别是 后者会换行
         
-        var counter = Counter()
+        let counter = Counter()
         //        counter.incrementBy(5, numberOfTimes: 3)    //这里swift只是把第一个参数当成incrementBy的局部名称，numberOfTime是局部名称 也是外部名称
         counter.incrementBy(amount: 5, numberOfTimes: 3)  //这个是加了#后 变成外部名称
         
         
         let stringResult = self.functionForView("AAA", aNum: 123)
-        println(stringResult)
-        println(" hello ,\(aStudent.name)")       //占位输出   占位符的写法  \()   括号里面必须放常量和变量
+        print(stringResult)
+        print(" hello ,\(aStudent.name)")       //占位输出   占位符的写法  \()   括号里面必须放常量和变量
         
         //        ------------------分割线----数组和字典-----------------
-        var A = (aNum ,"SSS")            //元组变量 （）里面放整形或者字符串
-        println(A)
+        let A = (aNum ,"SSS")            //元组变量 （）里面放整形或者字符串
+        print(A)
         
         var (B,d) = A                 //定义匿名元组变量个数要和定义好的数量一致  可以用（_,d）取消不要的元素
-        println("B = \(B),d = \(d)")
-        println(A.0)       //访问元素用.
+        print("B = \(B),d = \(d)")
+        print(A.0)       //访问元素用.
         
         
-        var Dic = (first:"hello" ,second:"world")        //字典
-        println( Dic.second )
+        _ = (first:"hello" ,second:"world")        //字典
+
         
         //        ------------------分割线----数据之间的转换-----------------
-        var strA = "12345"
-        var valueOne = strA.toInt()
-        println("ValueOne = \(valueOne)")       //把字符串 转换为整形 其中转换失败值为nil
+        let strA = "12345"
+        var valueOne = Int(strA)   //把字符串 转换为整形 其中转换失败值为nil
         
-        var floutA = 1.23
+        let floutA = 1.23
         valueOne = Int(floutA)                 //将浮点数强转成整形
-        var floutB = Float(valueOne!)
-        println(floutB)
+        _ = Float(valueOne!)
+
         
-        var C :Int? = 10
+        let C :Int? = 10
         
         if (valueOne != nil) {          //if 语句使用 1.if +布尔值{}  2.if +可选值{}   3.if +let 常量 = 可选值{}
-            println(valueOne)
+            print(valueOne)
         }
         
         if (C != nil) {
-            println("C != nil")
+            print("C != nil")
         }
         
         if let floutB = C {            //将C的值赋给floutB 如果floutB为nil 就是假
-            println(" floutB = \(floutB)")
+            print(" floutB = \(floutB)")
         }else{
-            println( "C is nil")
+            print( "C is nil")
         }
         
         //        ------------------分割线-----字符串--------------------------
         //2种方式定义空字符串
-        var strOne = ""
-        var strTwo = String()
+        let strOne = ""
+        _ = String()
         
         //判断是否为空
         if strOne.isEmpty {
-            println("strOne ==nil")
+            print("strOne ==nil")
         }
         
         // \r 回车符  \n 换行符  \"双引号  \'单引号
         
         
         //多个字符串变量的拼接 用+ 。 字符串变量和常量 用+ 或 +=
-        var str4 = "Hello"
-        var str5 = "World"
-        var str6 = str4 + str5
-        println(" str6 == \(str6)")
+        let str4 = "Hello"
+        let str5 = "World"
+        let str6 = str4 + str5
+        print(" str6 == \(str6)")
         
         var str7 = "Swift"
         str7 += "Good"
-        println(" str7 == \(str7)")
+        print(" str7 == \(str7)")
         
         //字符串和占位变量 组成新字符串
-        var a = 3
-        var strQ = "a ==\(a)"
-        println("\(strQ)")
+        let a = 3
+        let strQ = "a ==\(a)"
+        print("\(strQ)")
         
         //字符串的比较
         if strQ == str4 {
-            println(" is same ")
+            print(" is same ")
         }
         
         if str6.hasPrefix("H"){
@@ -208,17 +204,17 @@ class ViewController: UIViewController {
         }
         
         //大小写转换
-        var newStr = str6.uppercaseString
-        var newStr2 = str6.lowercaseString
+        let newStr = str6.uppercaseString
+        _ = str6.lowercaseString
         
-        println(newStr )
+        print(newStr )
         
         
         //遍历字符串
         
-        for temppp in str6 {
-            println(temppp)
-        }
+//        for temppp in str6 {
+//            println(temppp)
+//        }
         
         
         self.testForXunHuan()
@@ -232,13 +228,13 @@ class ViewController: UIViewController {
         var stringToEdit = TrackedString()
         stringToEdit.value = "this is first"
         stringToEdit.value += "this is second"
-        println("stringEditsNumber = \(stringToEdit.numberOfEdits)")
+
         
         
         
 //        CoderModel *coder = [CoderModel new] ;
-       var coder = CoderModel(coderModelWithName: "Sun", andAge: 23)
-       println("Coder == \(coder.name ),\(coder.age)")
+       let coder = CoderModel(coderModelWithName: "Sun", andAge: 23)
+       print("Coder == \(coder.name ),\(coder.age)")
         
         let fun1:(Int ,String) ->String = {(num: Int ,str:String) ->String in
             return String(num) + str
@@ -247,12 +243,12 @@ class ViewController: UIViewController {
         someTrailingBlick("Trailing Block", closure: fun1)
         someTrailingBlick2("Trailing Block2", fun1)
         
-        let fileManager = NSFileManager.defaultManager()
-        let URL = NSURL.fileURLWithPath("SwiftDemo/NoteFile")
+        _ = NSFileManager.defaultManager()
+        _ = NSURL.fileURLWithPath("SwiftDemo/NoteFile")
         
         let mainBundle = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
-        let data = NSData(contentsOfFile: mainBundle!)
-        println(" DATA : \(data!.length)")
+        _ = NSData(contentsOfFile: mainBundle!)
+
         
 
         
@@ -263,49 +259,49 @@ class ViewController: UIViewController {
     }
     
     func functionForView(str :NSString ,aNum: Int) ->NSString{
-        let aaa : NSString = String(aNum) as NSString!
+        _ = String(aNum) as NSString!
         return str.stringByAppendingString(String(aNum))
     }
     
     
     func testForXunHuan() {     //循环语句
         for var i = 0 ; i < 5 ; i++ {     //等号 大于 小于号 2边都要空格
-            println(" i == \(i)")
+            print(" i == \(i)")
         }
         
         //遍历整形序列
-        var A = 1...8
+        let A = 1...8
         for temp in A{
-            println(temp)
+            print(temp)
         }
         
         var B = 5
         while ( B < 10){
             B++
-            println("B == \(B)")
+            print("B == \(B)")
         }
         
         var C = 3
-        do {
-            println(C)
+        repeat {
+            print(C)
             C++
         } while (C < 5)
         
         
         switch (C) {
         case 3 :
-            println(" Dooooo ")
+            print(" Dooooo ")
         default :
-            println(" Default ")
+            print(" Default ")
         }
         
         switch (B) {
         case 1...4 :
-            println(" exsit1 ")
+            print(" exsit1 ")
         case 4...8 :
-            println(" exsit2 ")
+            print(" exsit2 ")
         default :
-            println(" no exsit ")
+            print(" no exsit ")
         }
         
     }
@@ -313,10 +309,10 @@ class ViewController: UIViewController {
     func testForArray() {
         var arr = ["hello" ,"world"]
         var arr1 :[String] = ["AAA" ,"CCC"]       //声明字符串数组
-        println("arr1 == \(arr1)")
+        print("arr1 == \(arr1)")
         
-        var  str = [" hellow",11]
-        println("str =\(str)")
+        let  str = [" hellow",11]
+        print("str =\(str)")
         
         /*运行结果
         str =(
@@ -332,15 +328,15 @@ class ViewController: UIViewController {
         arr.append("OOOPP")
         
         arr1.insert("HHH", atIndex: 2)
-        println("arr1 == \(arr1)")
+        print("arr1 == \(arr1)")
         
         arr1.removeAtIndex(0)
-        println("arr1 remove == \(arr1)")
+        print("arr1 remove == \(arr1)")
         
         //定义空数组
         var arr3 = [Int]()
         arr3.append(1)
-        println("arr3 ==\(arr3.isEmpty),\(arr3)")
+        print("arr3 ==\(arr3.isEmpty),\(arr3)")
         
         
         sayHello("Sun", value1: "OK")
@@ -351,20 +347,20 @@ class ViewController: UIViewController {
         var dicTwo = ["He":"One" ,"hh":"Two"]        //[]中由key:value 组成
         dicOne.updateValue(3,forKey:"H1")
         
-        println("dicOne == \(dicOne)")
+        print("dicOne == \(dicOne)")
         
-        var temp = dicTwo["hh"]     //访问此key的值
+        _ = dicTwo["hh"]!    //访问此key的值
         
         for (key,value) in dicTwo {       //变量字典
-            println("Key ==\(key) and Value == \(value)")
+            print("Key ==\(key) and Value == \(value)")
         }
         
-        var emptyDic = Dictionary <String ,String>()   //声明空字典
+        _ = Dictionary <String ,String>()   //声明空字典
     }
     
     func sayHello(value:String ,value1:String) {
-        var str = value + "" + value1
-        println(str)
+        let str = value + "" + value1
+        print(str)
     }
     
     func turnBackString(value:String ,value1:String) ->(String){
@@ -375,7 +371,7 @@ class ViewController: UIViewController {
         
         //闭包的使用
         GetList([1,2,3,4], pre: { (s:Int) -> Bool in
-            var value = s > 2
+            let value = s > 2
             return value
         })
         
@@ -474,26 +470,26 @@ class ViewController: UIViewController {
     }
     
     func testForStruct(){
-        var one = NewStruct()
-        var two = NewStruct(Name: "CHN",valueX: 30.0,valueY: 50.0)
+        let one = NewStruct()
+        let two = NewStruct(Name: "CHN",valueX: 30.0,valueY: 50.0)
         //        one.PointX
-        println("One == \(one) ,Two == \(two) ,Name ==\(two.getName())")
+        print("One == \(one) ,Two == \(two) ,Name ==\(two.getName())")
         
-        var p = Point(x: 10.0 ,y: 20.0)
+        let p = Point(x: 10.0 ,y: 20.0)
         var cp = CPoint()
         cp.XPoint = p
-        println("x == \(cp.XPoint.x), y == \(cp.XPoint.y)")
+        print("x == \(cp.XPoint.x), y == \(cp.XPoint.y)")
         
         let manager = DataManager()
         manager.data.append("some data")
         // DataImporter 实例的 lazy importer 属性还没被创建
-        println(manager.importer.fileName)    //此时被创建
+        print(manager.importer.fileName)    //此时被创建
         
         
         var playerOne: Player2? = Player2(coins: 100)
-        println("A New Player has joined the game\(playerOne!.coinInPurse),\(Bank.coinsBank)")
+        print("A New Player has joined the game\(playerOne!.coinInPurse),\(Bank.coinsBank)")
         playerOne!.winConus(500)
-        println(" player coins \(playerOne!.coinInPurse)")
+        print(" player coins \(playerOne!.coinInPurse)")
         playerOne = nil
         // ?号代表可能存在nil  !代表一定存在
         
@@ -565,31 +561,31 @@ class ViewController: UIViewController {
         func testF(num1: Int ,num2: Int) ->Bool{
             return num1 > num2
         }
-        sort(&nums, testF)
-        println(nums)
+        nums.sortInPlace(testF)
+        print(nums)
         
-        sort(&nums, { (num1: Int, num2: Int) -> Bool in
+        nums.sortInPlace({ (num1: Int, num2: Int) -> Bool in
             return num1 > num2
         })
-        println(nums)
+        print(nums)
         
-        sort(&nums, { (num1, num2) -> Bool in
+        nums.sortInPlace({ (num1, num2) -> Bool in
             return num1 > num2
         })
         
-        sort(&nums, {$0 > $1})
+        nums.sortInPlace({$0 > $1})
         
         
-        let f1 = MyNewClass.method
+        _ = MyNewClass.method
         // class func method 的版本
 //        let f2: (Int ->Int) = MyNewClass.method
-        let f3: MyNewClass ->Int ->Int = MyNewClass.method
+        _ = MyNewClass.method
         // func method 的柯里化版本
         
         // 获取随机数时要注意 arc4random产生的是uint32数字 在32位CPU环境中有一半机会转换时越界（uint 是有正负符号），使用以下方式
         let diceFaceCount: UInt32 = 6
         let randomRoll = Int(arc4random_uniform(diceFaceCount)) + 1     //产生一个0-5的随机数
-        println(randomRoll)
+        print(randomRoll)
         
         self.somenFunctionThatTakesAClosure { () -> () in
             
@@ -615,19 +611,19 @@ class ViewController: UIViewController {
     //MARK: 尾行闭包是在函数扩号之外的闭包表达式，支持作为最后一个参数调用
     func somenFunctionThatTakesAClosure(closure:() ->()){
         //函数体部分
-        println(" This is a trailing ")
+        print(" This is a trailing ")
         
     }
     
     func someTrailingBlick(str: String ,closure:(num22: Int,str2: String) ->String){   //第二个是函数参数，不能当变量使用
-        var string = closure(num22: 111,str2: "TTTT")
+        let string = closure(num22: 111,str2: "TTTT")
 
-        println("trailing str =\(str) closure =\(string)")
+        print("trailing str =\(str) closure =\(string)")
 
     }
     
-    func someTrailingBlick2(str: String,(Int ,String) ->String){     //第2个参数为函数
-        println("trailing str2 =\(str) ")
+    func someTrailingBlick2(str: String,_: (Int ,String) ->String){     //第2个参数为函数
+        print("trailing str2 =\(str) ")
     }
     
     
@@ -690,7 +686,7 @@ class ViewController: UIViewController {
     func replicatorLayer(){     // CAReplicatorLayer 能够以特定的次数复制图层
         
         
-        var view = UIView(frame: CGRectMake(175, 80, 250, 250))
+        let view = UIView(frame: CGRectMake(175, 80, 250, 250))
         view.backgroundColor = UIColor.whiteColor()
         view.center = self.view.center
         self.view .addSubview(view)
@@ -750,10 +746,10 @@ class ViewController: UIViewController {
         var numb1 = 10
         var numb2 = 20
         changeValues(&numb1, b: &numb2);
-        println(" numb1 now = \(numb1) ,numb2 now = \(numb2)")
+        print(" numb1 now = \(numb1) ,numb2 now = \(numb2)")
         
         join(string: "hello", toString: "world", withJoiner: ",")
-        containsCharacter(string: "hello", characterToFind: "h")
+        containsCharacter("hello", characterToFind: "h")
 
     }
     
@@ -771,8 +767,8 @@ class ViewController: UIViewController {
         return s1 + joiner + s2
     }
     //声明外部参数简单的方式 是在参数名前加#
-    func containsCharacter(#string : String , characterToFind : Character) -> Bool{
-        for character1 in string {
+    func containsCharacter(string : String , characterToFind : Character) -> Bool{
+        for character1 in string.characters {
             if character1 == characterToFind {
                 return true
             }

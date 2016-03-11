@@ -12,9 +12,9 @@ import Foundation
 class PopAnimator: NSObject ,UIViewControllerAnimatedTransitioning {
     let duration = 1.0
     var presenting = true
-    var originFrame = CGRect.zeroRect
+    var originFrame = CGRect.zero
     
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval
+    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval
     {
         return duration
     }
@@ -39,11 +39,12 @@ class PopAnimator: NSObject ,UIViewControllerAnimatedTransitioning {
             herbView?.clipsToBounds = true
         }
         
-        containerView.addSubview(toView!)
-        containerView.bringSubviewToFront(herbView!)
+        containerView!.addSubview(toView!)
+        
+        containerView!.bringSubviewToFront(herbView!)
         
 
-        UIView.animateWithDuration(duration, delay: 0.0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.0, options: nil, animations: {[weak self] () -> Void in
+        UIView.animateWithDuration(duration, delay: 0.0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.0, options: .LayoutSubviews , animations: {[weak self] () -> Void in
             herbView!.transform = self!.presenting ?  CGAffineTransformIdentity : scaleTransform
             herbView?.center = CGPoint(x: CGRectGetMidX(finalFrame!), y: CGRectGetMidY(finalFrame!))
         }) { (_) -> Void in

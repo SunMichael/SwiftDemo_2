@@ -41,12 +41,12 @@ class KeyboardViewController: UIInputViewController {
         self.view .addSubview(button)
     }
     func creatButtonWithTitle(title: String) ->UIButton{
-        let button = UIButton.buttonWithType(.System) as! UIButton
+        let button = UIButton(type: .System)
         button.frame = CGRectMake(0, 0, 30, 30)
         button.setTitle(title, forState: .Normal)
         button.sizeToFit()
         button.titleLabel?.font = UIFont.systemFontOfSize(15)
-        button.setTranslatesAutoresizingMaskIntoConstraints(false)
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = UIColor.blueColor()
         button.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
         button.addTarget(self, action: "didTapButton", forControlEvents: .TouchUpInside)
@@ -57,15 +57,15 @@ class KeyboardViewController: UIInputViewController {
         // Dispose of any resources that can be recreated
     }
 
-    override func textWillChange(textInput: UITextInput) {
+    override func textWillChange(textInput: UITextInput?) {
         // The app is about to change the document's contents. Perform any preparation here.
     }
 
-    override func textDidChange(textInput: UITextInput) {
+    override func textDidChange(textInput: UITextInput?) {
         // The app has just changed the document's contents, the document context has been updated.
     
         var textColor: UIColor
-        var proxy = self.textDocumentProxy as! UITextDocumentProxy
+        let proxy = self.textDocumentProxy 
         if proxy.keyboardAppearance == UIKeyboardAppearance.Dark {
             textColor = UIColor.whiteColor()
         } else {
